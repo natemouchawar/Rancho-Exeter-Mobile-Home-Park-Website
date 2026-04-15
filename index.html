@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rancho Exeter Mobile Home Park — Exeter, CA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background-color: #EEEBE4;
+      color: #313131;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .display { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* ─── NAVBAR ─── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 44px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    #navbar.scrolled {
+      background-color: rgba(238, 235, 228, 0.97);
+      padding: 20px 56px;
+      box-shadow: 0 1px 0 rgba(49,49,49,0.07);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #EEEBE4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    #navbar.scrolled .nav-logo { color: #313131; }
+    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-link {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(238,235,228,0.75);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover { color: #EEEBE4; }
+    #navbar.scrolled .nav-link { color: rgba(49,49,49,0.6); }
+    #navbar.scrolled .nav-link:hover { color: #313131; }
+    .nav-cta {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #313131;
+      background: #EEEBE4;
+      border: 1px solid #EEEBE4;
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .nav-cta:hover { background: transparent; color: #EEEBE4; border-color: rgba(238,235,228,0.6); }
+    .nav-cta:active { transform: scale(0.98); }
+    #navbar.scrolled .nav-cta { background: #96847a; border-color: #96847a; color: #EEEBE4; }
+    #navbar.scrolled .nav-cta:hover { background: #7a6a60; border-color: #7a6a60; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: #EEEBE4;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #navbar.scrolled .hamburger span { background: #313131; }
+
+    /* Mobile overlay */
+    #mobile-overlay {
+      position: fixed; inset: 0;
+      z-index: 98;
+      background: rgba(49,49,49,0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    #mobile-overlay.active { opacity: 1; pointer-events: all; }
+
+    /* Mobile menu */
+    #mobile-menu {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: #EEEBE4;
+      z-index: 99;
+      padding: 88px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -4px 0 60px rgba(49,49,49,0.15);
+    }
+    #mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1;
+      color: #313131;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .mobile-nav-link:hover { color: #96847a; }
+    .mobile-nav-link:focus-visible { outline: 2px solid #96847a; outline-offset: 4px; }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      overflow: hidden;
+    }
+    .hero-img-wrap {
+      position: absolute; inset: 0;
+    }
+    .hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+      filter: brightness(0.75) contrast(1.22) saturate(1.12);
+    }
+    /* Warm color treatment */
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: rgba(120,100,85,0.18);
+      mix-blend-mode: multiply;
+    }
+    /* Gradient overlay — heavier at top (nav) and bottom (heading) */
+    .hero-grad {
+      position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(to bottom,
+          rgba(30,25,20,0.55) 0%,
+          rgba(30,25,20,0.12) 25%,
+          rgba(30,25,20,0.02) 50%,
+          rgba(30,25,20,0.45) 72%,
+          rgba(30,25,20,0.72) 100%
+        );
+    }
+    /* Content sits in the lower third of the hero */
+    .hero-content {
+      position: relative; z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      padding: 0 32px 14vh;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(238,235,228,0.65);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 10vw, 118px);
+      font-weight: 300;
+      line-height: 0.93;
+      letter-spacing: -0.025em;
+      color: #EEEBE4;
+      margin-bottom: 44px;
+    }
+    .hero-title em { font-style: italic; }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(238,235,228,0.7);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .hero-cta:hover { color: #EEEBE4; }
+    .hero-cta-line {
+      width: 44px; height: 1px;
+      background: currentColor;
+      transition: width 0.35s ease;
+    }
+    .hero-cta:hover .hero-cta-line { width: 64px; }
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .scroll-hint span {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(238,235,228,0.4);
+    }
+    .scroll-hint-line {
+      width: 1px; height: 56px;
+      background: linear-gradient(to bottom, rgba(238,235,228,0.45), transparent);
+    }
+
+    /* ─── LAYOUT ─── */
+    .section { padding: 104px 56px; }
+    .container { max-width: 1240px; margin: 0 auto; }
+    .divider {
+      width: 44px; height: 1px;
+      background: #96847a;
+      margin: 28px 0;
+    }
+    .divider-center { margin-left: auto; margin-right: auto; }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-wrap img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      filter: brightness(1.0) contrast(1.14) saturate(1.5);
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .about-img-wrap:hover img { transform: scale(1.04); }
+    .about-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(150,132,122,0.32) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .about-img-tint {
+      position: absolute; inset: 0;
+      background: rgba(150,132,122,0.09);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.88) contrast(1.18) saturate(1.32);
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .gallery-item:hover img { transform: scale(1.07); }
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(150,132,122,0.12);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    /* ─── AMENITIES ─── */
+    .amenity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(150,132,122,0.18);
+      border: 1px solid rgba(150,132,122,0.18);
+    }
+    .amenity-item {
+      background: #fff;
+      padding: 44px 36px;
+      transition: background-color 0.3s ease;
+      cursor: default;
+    }
+    .amenity-item:hover { background: #EEEBE4; }
+
+    /* ─── BUTTONS ─── */
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #313131;
+      background: #EEEBE4;
+      border: 1px solid #EEEBE4;
+      padding: 15px 36px;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .btn-dark:hover { background: transparent; color: #EEEBE4; border-color: rgba(238,235,228,0.5); }
+    .btn-dark:active { transform: scale(0.98); }
+    .btn-dark:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
+
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #313131;
+      background: transparent;
+      border: 1px solid rgba(49,49,49,0.35);
+      padding: 15px 36px;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .btn-outline-dark:hover { background: #313131; color: #EEEBE4; border-color: #313131; }
+    .btn-outline-dark:active { transform: scale(0.98); }
+    .btn-outline-dark:focus-visible { outline: 2px solid #313131; outline-offset: 3px; }
+
+    .btn-cream-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #EEEBE4;
+      background: transparent;
+      border: 1px solid rgba(238,235,228,0.45);
+      padding: 15px 36px;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .btn-cream-outline:hover { background: rgba(238,235,228,0.1); border-color: rgba(238,235,228,0.8); }
+    .btn-cream-outline:active { transform: scale(0.98); }
+    .btn-cream-outline:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
+
+    /* ─── CONTACT FORM ─── */
+    .form-group { margin-bottom: 28px; }
+    .form-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #96847a;
+      margin-bottom: 10px;
+    }
+    .form-input {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(238,235,228,0.22);
+      padding: 10px 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #EEEBE4;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .form-input::placeholder { color: rgba(238,235,228,0.3); }
+    .form-input:focus { border-color: rgba(238,235,228,0.7); }
+    .form-input:focus-visible { border-color: rgba(238,235,228,0.9); }
+    textarea.form-input { resize: vertical; min-height: 90px; }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .section { padding: 80px 40px; }
+      #navbar { padding: 24px 40px; }
+      #navbar.scrolled { padding: 16px 40px; }
+      .about-grid { gap: 56px; }
+    }
+    @media (max-width: 768px) {
+      #navbar { padding: 20px 24px; }
+      #navbar.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-img-wrap { order: -1; }
+      .about-img-wrap img { aspect-ratio: 3/2; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .amenity-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 56px; }
+      .hero-title { font-size: clamp(52px, 13vw, 82px); }
+    }
+    @media (max-width: 540px) {
+      .amenity-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Rancho Exeter</a>
+
+  <div class="nav-links">
+    <a href="#community" class="nav-link">Community</a>
+    <a href="#amenities" class="nav-link">Amenities</a>
+    <a href="#homes" class="nav-link">Available Homes</a>
+    <a href="#contact" class="nav-cta">Contact Us</a>
+  </div>
+
+  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span id="ham1"></span>
+    <span id="ham2"></span>
+    <span id="ham3"></span>
+  </button>
+</nav>
+
+<div id="mobile-overlay"></div>
+
+<div id="mobile-menu" role="dialog" aria-label="Navigation">
+  <a href="#community" class="mobile-nav-link">Community</a>
+  <a href="#amenities" class="mobile-nav-link">Amenities</a>
+  <a href="#homes" class="mobile-nav-link">Available Homes</a>
+  <a href="#contact" class="mobile-nav-link" style="color:#96847a;">Contact Us</a>
+  <div style="margin-top:auto;padding-top:40px;border-top:1px solid rgba(49,49,49,0.1);">
+    <p style="font-size:13px;color:rgba(49,49,49,0.45);line-height:1.6;">314 N Albert<br>Exeter, CA 93221</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-img-wrap">
+    <img
+      src="brand_assets/IMG_4345.jpeg"
+      alt="Rancho Exeter Mobile Home Park, Exeter CA"
+    />
+  </div>
+  <div class="hero-grad"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Exeter, California · Est. 1978</p>
+    <h1 class="hero-title">
+      A Community<br><em>to Call Home</em>
+    </h1>
+    <a href="#community" class="hero-cta">
+      <span class="hero-cta-line"></span>
+      Discover Our Community
+    </a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-hint-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT / COMMUNITY
+═══════════════════════════════════════════════════════ -->
+<section id="community" class="section" style="background:#EEEBE4;">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Image -->
+      <div class="about-img-wrap fade-up">
+        <img
+          src="brand_assets/IMG_4348.jpeg"
+          alt="Rancho Exeter entrance sign with bougainvillea"
+          style="object-position: center 30%;"
+        />
+        <div class="about-img-overlay"></div>
+        <div class="about-img-tint"></div>
+      </div>
+
+      <!-- Text -->
+      <div class="fade-up" style="transition-delay:0.18s;">
+        <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Our Community</p>
+        <h2 class="display" style="font-size:clamp(42px,5.5vw,66px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;">
+          Welcome to<br><em>Rancho Exeter</em>
+        </h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;line-height:1.78;color:rgba(49,49,49,0.72);margin-bottom:22px;">
+          Rancho Exeter is a welcoming 55+ senior community nestled in the heart of Exeter, California. For over four decades, we've offered peaceful, affordable living designed for those who have earned a little more ease — surrounded by neighbors who feel like friends.
+        </p>
+        <p style="font-size:16px;line-height:1.78;color:rgba(49,49,49,0.72);margin-bottom:48px;">
+          With professional on-site management, responsive maintenance, and a warm community atmosphere, life at Rancho Exeter is as comfortable as it is connected. You'll find the quiet you're looking for — and the neighbors who make it feel like home.
+        </p>
+
+        <div style="display:flex;gap:52px;">
+          <div>
+            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">45<span style="font-size:32px;">+</span></div>
+            <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Years Established</div>
+          </div>
+          <div>
+            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">120</div>
+            <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Resident Homes</div>
+          </div>
+          <div>
+            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">15</div>
+            <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Acres of Grounds</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PHOTO GALLERY  (3 photos — replace with brand_assets images)
+═══════════════════════════════════════════════════════ -->
+<section style="padding:4px;background:#EEEBE4;">
+  <div class="gallery-grid">
+    <div class="gallery-item fade-up">
+      <img src="brand_assets/IMG_4339.jpeg" alt="Rancho Exeter community street" style="object-position: center 50%;" />
+    </div>
+    <div class="gallery-item fade-up" style="transition-delay:0.12s;">
+      <img src="brand_assets/IMG_4324.jpeg" alt="Community swimming pool" style="object-position: center 40%;" />
+    </div>
+    <div class="gallery-item fade-up" style="transition-delay:0.22s;">
+      <img src="brand_assets/IMG_4345.jpeg" alt="Rancho Exeter street view" style="object-position: center 55%;" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     AVAILABLE HOMES
+═══════════════════════════════════════════════════════ -->
+<section id="homes" class="section" style="background:#EEEBE4;">
+  <div class="container" style="text-align:center;">
+    <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Real Estate</p>
+    <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
+      Available <em>Homes</em>
+    </h2>
+    <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
+    <p class="fade-up" style="font-size:15px;line-height:1.78;color:rgba(49,49,49,0.65);max-width:480px;margin:0 auto 40px;transition-delay:0.2s;">
+      Interested in making Rancho Exeter your home? Reach out and we'll point you in the right direction.
+    </p>
+    <a href="#contact" class="fade-up btn-primary" style="transition-delay:0.26s;">View Available Homes</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     AMENITIES
+═══════════════════════════════════════════════════════ -->
+<section id="amenities" class="section" style="background:#fff;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px;">
+      <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Life at Rancho Exeter</p>
+      <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
+        Community <em>Amenities</em>
+      </h2>
+      <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
+    </div>
+
+    <div class="amenity-grid fade-up" style="transition-delay:0.2s;">
+
+      <div class="amenity-item">
+        <div style="margin-bottom:20px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M5 21C5 17.7 7.7 15 11 15C14.3 15 15 17 15 17C15 17 16.7 15 20 15C23.3 15 26 17.7 26 21V23H5V21Z" stroke="#96847a" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <rect x="13" y="9" width="4" height="6" rx="1" stroke="#96847a" stroke-width="1.5"/>
+            <circle cx="15" cy="6.5" r="2.5" stroke="#96847a" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:21px;font-weight:500;color:#313131;margin-bottom:10px;">Swimming Pool</h3>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Heated community pool open seasonally — perfect for a relaxing summer afternoon.</p>
+      </div>
+
+      <div class="amenity-item">
+        <div style="margin-bottom:20px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="4" y="8" width="22" height="14" rx="2" stroke="#96847a" stroke-width="1.5" fill="none"/>
+            <path d="M10 13H20M10 17H16" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:21px;font-weight:500;color:#313131;margin-bottom:10px;">Clubhouse &amp; Events</h3>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Fully equipped resident clubhouse available for private events and community gatherings.</p>
+      </div>
+
+      <div class="amenity-item">
+        <div style="margin-bottom:20px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M5 22C9 22 12 18 15 18C18 18 21 22 25 22" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M5 17C8 17 11 14 15 14C19 14 22 17 25 17" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+            <circle cx="10" cy="10" r="2.5" stroke="#96847a" stroke-width="1.5"/>
+            <path d="M10 12.5V22" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 2"/>
+            <circle cx="20" cy="8" r="2" stroke="#96847a" stroke-width="1.5"/>
+            <path d="M20 10V17" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 2"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:21px;font-weight:500;color:#313131;margin-bottom:10px;">Landscaped Grounds</h3>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Beautifully maintained landscaping and green common areas throughout the community.</p>
+      </div>
+
+      <div class="amenity-item">
+        <div style="margin-bottom:20px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="5" y="7" width="20" height="16" rx="2" stroke="#96847a" stroke-width="1.5" fill="none"/>
+            <path d="M5 13H25" stroke="#96847a" stroke-width="1.5"/>
+            <rect x="10" y="17" width="4" height="3" rx="0.5" stroke="#96847a" stroke-width="1.2" fill="none"/>
+            <rect x="17" y="17" width="4" height="3" rx="0.5" stroke="#96847a" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:21px;font-weight:500;color:#313131;margin-bottom:10px;">Laundry Facilities</h3>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">On-site laundry rooms with modern washers and dryers, accessible seven days a week.</p>
+      </div>
+
+      <div class="amenity-item">
+        <div style="margin-bottom:20px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M9 24V18C9 16.3 10.3 15 12 15H18C19.7 15 21 16.3 21 18V24" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6 24H24" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="15" cy="10" r="4" stroke="#96847a" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:21px;font-weight:500;color:#313131;margin-bottom:10px;">Pet Friendly</h3>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">All-welcome pet-friendly community with open green spaces for you and your pets.</p>
+      </div>
+
+      <div class="amenity-item">
+        <div style="margin-bottom:20px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="14" r="9" stroke="#96847a" stroke-width="1.5"/>
+            <path d="M15 9V14L18.5 17.5" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:21px;font-weight:500;color:#313131;margin-bottom:10px;">On-Site Management</h3>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Responsive management on-site Mon–Fri with a 24-hour emergency maintenance line.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     NEARBY ATTRACTIONS
+═══════════════════════════════════════════════════════ -->
+<section id="nearby" class="section" style="background:#EEEBE4;padding-top:0;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px;">
+      <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">The Neighborhood</p>
+      <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
+        Everything <em>Nearby</em>
+      </h2>
+      <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
+      <p class="fade-up" style="font-size:15px;line-height:1.78;color:rgba(49,49,49,0.65);max-width:520px;margin:0 auto;transition-delay:0.2s;">
+        Rancho Exeter puts you within easy reach of everything that makes daily life comfortable and enjoyable.
+      </p>
+    </div>
+
+    <div class="fade-up" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(150,132,122,0.15);border:1px solid rgba(150,132,122,0.15);transition-delay:0.22s;">
+
+      <!-- Golf -->
+      <div style="background:#fff;padding:40px 32px;transition:background-color 0.3s ease;" onmouseover="this.style.background='#EEEBE4'" onmouseout="this.style.background='#fff'">
+        <div style="margin-bottom:18px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="7" r="3" stroke="#96847a" stroke-width="1.5"/>
+            <path d="M12 10L8 24" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M18 10L22 24" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M7 24H23" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M19 14L25 12L19 10" stroke="#96847a" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:20px;font-weight:500;color:#313131;margin-bottom:8px;">Public Golf Course</h3>
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#96847a;margin-bottom:10px;">Across the Street</p>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">A public golf course right across the street — walk over for a round any morning of the week.</p>
+      </div>
+
+      <!-- Medical -->
+      <div style="background:#fff;padding:40px 32px;transition:background-color 0.3s ease;" onmouseover="this.style.background='#EEEBE4'" onmouseout="this.style.background='#fff'">
+        <div style="margin-bottom:18px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="5" y="7" width="20" height="18" rx="2" stroke="#96847a" stroke-width="1.5" fill="none"/>
+            <path d="M15 12V20M11 16H19" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M11 7V5M19 7V5" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:20px;font-weight:500;color:#313131;margin-bottom:8px;">Medical Care</h3>
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#96847a;margin-bottom:10px;">Close to Home</p>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Exeter Hospital and Kaweah Health Medical Center in nearby Visalia provide top-quality healthcare.</p>
+      </div>
+
+      <!-- Downtown -->
+      <div style="background:#fff;padding:40px 32px;transition:background-color 0.3s ease;" onmouseover="this.style.background='#EEEBE4'" onmouseout="this.style.background='#fff'">
+        <div style="margin-bottom:18px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M5 24V12L10 7L15 11L20 7L25 12V24H5Z" stroke="#96847a" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <rect x="12" y="17" width="6" height="7" rx="0.5" stroke="#96847a" stroke-width="1.3" fill="none"/>
+            <rect x="7" y="15" width="4" height="3" rx="0.5" stroke="#96847a" stroke-width="1.2" fill="none"/>
+            <rect x="19" y="15" width="4" height="3" rx="0.5" stroke="#96847a" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:20px;font-weight:500;color:#313131;margin-bottom:8px;">Downtown Exeter</h3>
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#96847a;margin-bottom:10px;">Minutes Away</p>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Charming small-town downtown with local dining, shops, banking, and community events year-round.</p>
+      </div>
+
+      <!-- Grocery / Shopping -->
+      <div style="background:#fff;padding:40px 32px;transition:background-color 0.3s ease;" onmouseover="this.style.background='#EEEBE4'" onmouseout="this.style.background='#fff'">
+        <div style="margin-bottom:18px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M4 5H7L10 19H22L25 9H8" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="12" cy="23" r="1.5" stroke="#96847a" stroke-width="1.3"/>
+            <circle cx="20" cy="23" r="1.5" stroke="#96847a" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:20px;font-weight:500;color:#313131;margin-bottom:8px;">Grocery &amp; Shopping</h3>
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#96847a;margin-bottom:10px;">Nearby Conveniences</p>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Walmart, SaveMart, and local grocery stores are all within a short drive for everyday essentials.</p>
+      </div>
+
+      <!-- Senior Center -->
+      <div style="background:#fff;padding:40px 32px;transition:background-color 0.3s ease;" onmouseover="this.style.background='#EEEBE4'" onmouseout="this.style.background='#fff'">
+        <div style="margin-bottom:18px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M15 5C11 5 8 8 8 12C8 17 15 25 15 25C15 25 22 17 22 12C22 8 19 5 15 5Z" stroke="#96847a" stroke-width="1.5" fill="none"/>
+            <circle cx="15" cy="12" r="3" stroke="#96847a" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:20px;font-weight:500;color:#313131;margin-bottom:8px;">Senior Center</h3>
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#96847a;margin-bottom:10px;">Community &amp; Activities</p>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">The Exeter Senior Center offers programs, classes, and social activities tailored for active seniors.</p>
+      </div>
+
+      <!-- Parks & Recreation -->
+      <div style="background:#fff;padding:40px 32px;transition:background-color 0.3s ease;" onmouseover="this.style.background='#EEEBE4'" onmouseout="this.style.background='#fff'">
+        <div style="margin-bottom:18px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M15 5L15 25" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M8 12C8 12 10 8 15 8C20 8 22 12 22 12" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M6 18C6 18 9 14 15 14C21 14 24 18 24 18" stroke="#96847a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M5 25H25" stroke="#96847a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="display" style="font-size:20px;font-weight:500;color:#313131;margin-bottom:8px;">Parks &amp; Nature</h3>
+        <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#96847a;margin-bottom:10px;">Fresh Air &amp; Outdoors</p>
+        <p style="font-size:14px;line-height:1.75;color:rgba(49,49,49,0.58);">Rocky Hill and Sequoia National Park are within easy reach for scenic drives and nature walks.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     GOOGLE MAPS
+═══════════════════════════════════════════════════════ -->
+<section id="location" style="background:#313131;padding:64px 56px;">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-bottom:32px;">
+      <div class="fade-up">
+        <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(238,235,228,0.4);margin-bottom:10px;">Find Us</p>
+        <div class="display" style="font-size:clamp(28px,4vw,44px);font-weight:300;color:#EEEBE4;line-height:1;">314 N Albert · <em>Exeter, CA 93221</em></div>
+      </div>
+      <a href="https://maps.google.com/?q=314+N+Albert+St,+Exeter,+CA+93221" target="_blank" rel="noopener"
+         style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(238,235,228,0.55);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s ease;"
+         onmouseover="this.style.color='#EEEBE4'" onmouseout="this.style.color='rgba(238,235,228,0.55)'">
+        Open in Google Maps
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="fade-up" style="overflow:hidden;border-radius:2px;transition-delay:0.1s;">
+      <iframe
+        src="https://maps.google.com/maps?q=314+N+Albert+St,+Exeter,+CA+93221&z=15&output=embed"
+        width="100%"
+        height="420"
+        style="border:0;display:block;filter:grayscale(0.15) contrast(1.02);"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Rancho Exeter Mobile Home Park location">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════════════ -->
+<section id="contact" class="section" style="background:#313131;">
+  <div class="container">
+    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start;">
+
+      <!-- Left: info -->
+      <div class="fade-up">
+        <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(238,235,228,0.4);margin-bottom:22px;">Get In Touch</p>
+        <h2 class="display" style="font-size:clamp(40px,5.5vw,66px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#EEEBE4;margin-bottom:0;">
+          Ready to<br><em>Make a Move?</em>
+        </h2>
+        <div class="divider" style="background:rgba(238,235,228,0.25);"></div>
+        <p style="font-size:15px;line-height:1.78;color:rgba(238,235,228,0.58);margin-bottom:52px;">
+          Our team is here to answer your questions, schedule tours, and help you find your perfect home. Reach out — we'd love to hear from you.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:36px;">
+
+          <a href="tel:+19494631167"
+             style="display:flex;align-items:flex-start;gap:20px;text-decoration:none;color:#EEEBE4;transition:opacity 0.2s ease;"
+             onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+            <div>
+              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Phone</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">(949) 463-1167</div>
+            </div>
+          </a>
+
+          <a href="https://ranchoexetermhp.com"
+             target="_blank" rel="noopener"
+             style="display:flex;align-items:flex-start;gap:20px;text-decoration:none;color:#EEEBE4;transition:opacity 0.2s ease;"
+             onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+            <div>
+              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Website</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">ranchoexetermhp.com</div>
+            </div>
+          </a>
+
+          <div style="display:flex;align-items:flex-start;gap:20px;color:#EEEBE4;">
+            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+            <div>
+              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Address</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1.4;">314 N Albert<br>Exeter, CA 93221</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:20px;color:#EEEBE4;">
+            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+            <div>
+              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Office Hours</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">Mon – Fri, 9am – 5pm</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="fade-up" style="transition-delay:0.18s;">
+        <form onsubmit="handleSubmit(event)" id="contact-form">
+          <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:0 32px;">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" placeholder="Jane" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" placeholder="Smith" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone <span style="color:rgba(238,235,228,0.3);font-weight:300;">— optional</span></label>
+            <input type="tel" class="form-input" placeholder="(949) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" placeholder="Tell us what you're looking for…" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn-cream-outline" style="width:100%;justify-content:center;margin-top:8px;">
+            Send Message
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <div id="form-success" style="display:none;padding:48px 0;text-align:center;">
+          <div class="display" style="font-size:36px;font-weight:300;color:#EEEBE4;margin-bottom:12px;font-style:italic;">Message Sent</div>
+          <p style="font-size:14px;color:rgba(238,235,228,0.55);">Thank you for reaching out. We'll be in touch shortly.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer style="background:#1a1a1a;padding:64px 56px 36px;">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(238,235,228,0.07);">
+
+      <div>
+        <div class="display" style="font-size:18px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:#EEEBE4;margin-bottom:8px;">Rancho Exeter</div>
+        <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(238,235,228,0.3);">Mobile Home Park · Exeter, CA</div>
+      </div>
+
+      <div style="display:flex;gap:36px;flex-wrap:wrap;align-items:center;">
+        <a href="#community" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Community</a>
+        <a href="#amenities" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Amenities</a>
+        <a href="#homes" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Available Homes</a>
+        <a href="#contact" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Contact</a>
+      </div>
+
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:32px;">
+      <p style="font-size:11px;color:rgba(238,235,228,0.22);">© 2026 Rancho Exeter Mobile Home Park. All rights reserved.</p>
+      <p style="font-size:11px;color:rgba(238,235,228,0.16);">Equal Housing Opportunity · 314 N Albert, Exeter CA 93221</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════ -->
+<script>
+  // Nav scroll behavior
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Mobile menu
+  const toggle   = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay  = document.getElementById('mobile-overlay');
+  const ham1     = document.getElementById('ham1');
+  const ham2     = document.getElementById('ham2');
+  const ham3     = document.getElementById('ham3');
+  let menuOpen   = false;
+
+  function openMenu() {
+    menuOpen = true;
+    mobileMenu.classList.add('open');
+    overlay.classList.add('active');
+    toggle.setAttribute('aria-expanded', 'true');
+    ham1.style.transform = 'translateY(6.5px) rotate(45deg)';
+    ham2.style.opacity   = '0';
+    ham3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    overlay.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+    ham1.style.transform = '';
+    ham2.style.opacity   = '1';
+    ham3.style.transform = '';
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+  overlay.addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Preview / compact mode
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('preview') || params.has('compact')) {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      el.style.transition = 'none';
+      el.classList.add('visible');
+    });
+  }
+  if (params.has('compact')) {
+    const hero = document.getElementById('hero');
+    if (hero) { hero.style.height = 'auto'; hero.style.minHeight = '0'; }
+    const hint = document.querySelector('.scroll-hint');
+    if (hint) hint.style.display = 'none';
+  }
+
+  // Scroll animations
+  const fadeEls = document.querySelectorAll('.fade-up:not(.visible)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  fadeEls.forEach(el => io.observe(el));
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+</script>
+</body>
+</html>
