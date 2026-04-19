@@ -556,7 +556,7 @@
             <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Years Established</div>
           </div>
           <div>
-            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">120</div>
+            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">131</div>
             <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Resident Homes</div>
           </div>
           <div>
@@ -593,16 +593,34 @@
      AVAILABLE HOMES
 ═══════════════════════════════════════════════════════ -->
 <section id="homes" class="section" style="background:#EEEBE4;">
-  <div class="container" style="text-align:center;">
-    <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Real Estate</p>
-    <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
-      Available <em>Homes</em>
-    </h2>
-    <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
-    <p class="fade-up" style="font-size:15px;line-height:1.78;color:rgba(49,49,49,0.65);max-width:480px;margin:0 auto 40px;transition-delay:0.2s;">
-      Interested in making Rancho Exeter your home? Reach out and we'll point you in the right direction.
-    </p>
-    <a href="#contact" class="fade-up btn-primary" style="transition-delay:0.26s;">View Available Homes</a>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px;">
+      <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Real Estate</p>
+      <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
+        Available <em>Homes</em>
+      </h2>
+      <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
+    </div>
+
+    <!-- Listing card -->
+    <div class="fade-up" style="max-width:480px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(49,49,49,0.07),0 1px 4px rgba(49,49,49,0.04);transition-delay:0.2s;">
+      <div style="overflow:hidden;aspect-ratio:16/10;position:relative;">
+        <img src="brand_assets/home-101.png" alt="314 N Albert Avenue 101, Exeter CA"
+             style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.97) contrast(1.08) saturate(1.1);transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);"
+             onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(49,49,49,0.28) 0%,transparent 55%);pointer-events:none;"></div>
+      </div>
+      <div style="padding:32px 36px 36px;">
+        <p style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#96847a;margin-bottom:12px;">For Sale</p>
+        <div class="display" style="font-size:32px;font-weight:300;color:#313131;line-height:1.1;margin-bottom:4px;">$59,000 <span style="font-size:18px;color:rgba(49,49,49,0.45);font-weight:300;">USD</span></div>
+        <div style="width:36px;height:1px;background:#96847a;margin:16px 0;"></div>
+        <p style="font-size:14px;line-height:1.7;color:rgba(49,49,49,0.65);">314 N Albert Avenue, Unit 101<br>Exeter, CA 93221</p>
+        <a href="#contact" class="btn-outline-dark" style="margin-top:28px;width:100%;justify-content:center;">
+          Inquire About This Home
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
