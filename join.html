@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Email List — Rancho Exeter Mobile Home Park</title>
+  <meta name="description" content="Join the Rancho Exeter resident email list for community announcements, maintenance updates, and event news." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background-color: #EEEBE4;
+      color: #313131;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .display { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      padding: 36px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #313131;
+      text-decoration: none;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(49,49,49,0.55);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .back-link:hover { color: #313131; }
+    .back-link:focus-visible { outline: 2px solid rgba(49,49,49,0.5); outline-offset: 4px; color: #313131; }
+    .back-link-line {
+      width: 32px; height: 1px;
+      background: currentColor;
+      transition: width 0.35s ease;
+    }
+    .back-link:hover .back-link-line { width: 48px; }
+
+    /* ─── MAIN ─── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 56px 80px;
+    }
+    .join-card {
+      width: 100%;
+      max-width: 560px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #96847a;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+    .headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5.5vw, 58px);
+      font-weight: 300;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      color: #313131;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    .headline em { font-style: italic; }
+    .divider {
+      width: 44px; height: 1px;
+      background: #96847a;
+      margin: 28px auto;
+    }
+    .description {
+      font-size: 15px;
+      line-height: 1.78;
+      color: rgba(49,49,49,0.72);
+      text-align: center;
+      margin-bottom: 52px;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── FORM ─── */
+    .form-group { margin-bottom: 28px; }
+    .form-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #96847a;
+      margin-bottom: 10px;
+    }
+    .form-input {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(49,49,49,0.22);
+      padding: 10px 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #313131;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .form-input::placeholder { color: rgba(49,49,49,0.35); }
+    .form-input:focus { border-color: rgba(49,49,49,0.6); }
+    .form-input:focus-visible { border-color: #313131; }
+
+    /* ─── BUTTON (btn-outline-dark, matching homepage) ─── */
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #313131;
+      background: transparent;
+      border: 1px solid rgba(49,49,49,0.35);
+      padding: 15px 36px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      border-radius: 1px;
+      margin-top: 8px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.2s ease;
+    }
+    .btn-outline-dark:hover { background: #313131; color: #EEEBE4; border-color: #313131; }
+    .btn-outline-dark:active { transform: scale(0.98); }
+    .btn-outline-dark:focus-visible { outline: 2px solid #313131; outline-offset: 3px; }
+    .btn-outline-dark:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: transparent;
+      color: #313131;
+      border-color: rgba(49,49,49,0.2);
+    }
+
+    /* ─── MESSAGES ─── */
+    .form-message {
+      margin-top: 20px;
+      padding: 14px 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      border-radius: 2px;
+      display: none;
+    }
+    .form-message.visible { display: block; }
+    .form-message.error {
+      color: #7a2b1a;
+      background: rgba(200,90,70,0.08);
+      border: 1px solid rgba(200,90,70,0.28);
+    }
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 32px 0 8px;
+    }
+    .success-panel.visible { display: block; }
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: #313131;
+      margin-bottom: 14px;
+      font-style: italic;
+      line-height: 1.15;
+    }
+    .success-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(49,49,49,0.62);
+    }
+
+    /* ─── FOOTER ─── */
+    .page-footer {
+      padding: 32px 56px;
+      font-size: 11px;
+      color: rgba(49,49,49,0.35);
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .topbar { padding: 24px 24px; }
+      main { padding: 16px 24px 64px; }
+      .page-footer { padding: 24px; }
+      .form-row { grid-template-columns: 1fr !important; }
+      .description { margin-bottom: 40px; }
+    }
+    @media (max-width: 480px) {
+      .topbar { flex-direction: row; gap: 16px; }
+      .logo { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="/" class="logo">Rancho Exeter</a>
+    <a href="/" class="back-link">
+      <span class="back-link-line"></span>
+      Back to Home
+    </a>
+  </div>
+
+  <main>
+    <div class="join-card">
+      <p class="eyebrow">Resident Email List</p>
+      <h1 class="headline">
+        Join the Rancho Exeter<br><em>Resident Email List</em>
+      </h1>
+      <div class="divider"></div>
+      <p class="description">
+        Get community announcements, maintenance updates, and event news delivered straight to your inbox. We'll only use your email for park communications — never shared with third parties.
+      </p>
+
+      <form id="join-form" novalidate>
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:0 32px;">
+          <div class="form-group">
+            <label class="form-label" for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Jane" required autocomplete="given-name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Smith" required autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="lotNumber">Lot Number</label>
+          <input type="text" id="lotNumber" name="lotNumber" class="form-input" placeholder="101" required inputmode="numeric" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number <span style="color:rgba(49,49,49,0.35);font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <input type="tel" id="phone" name="phone" class="form-input" placeholder="(555) 123-4567" autocomplete="tel" inputmode="tel" />
+        </div>
+
+        <button type="submit" id="join-submit" class="btn-outline-dark">
+          <span id="join-submit-label">Join the List</span>
+          <svg id="join-submit-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div id="form-error" class="form-message error" role="alert" aria-live="polite"></div>
+      </form>
+
+      <div id="join-success" class="success-panel" role="status" aria-live="polite">
+        <div class="success-title">🎉 You're on the list!</div>
+        <p class="success-text">Welcome to the Rancho Exeter community.</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="page-footer">
+    © 2026 Rancho Exeter Mobile Home Park · 314 N Albert, Exeter CA 93221
+  </div>
+
+  <script>
+    const form = document.getElementById('join-form');
+    const submitBtn = document.getElementById('join-submit');
+    const submitLabel = document.getElementById('join-submit-label');
+    const submitArrow = document.getElementById('join-submit-arrow');
+    const errorBox = document.getElementById('form-error');
+    const successPanel = document.getElementById('join-success');
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.classList.add('visible');
+    }
+    function clearError() {
+      errorBox.textContent = '';
+      errorBox.classList.remove('visible');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError();
+
+      const data = {
+        firstName: form.firstName.value.trim(),
+        lastName:  form.lastName.value.trim(),
+        lotNumber: form.lotNumber.value.trim(),
+        email:     form.email.value.trim(),
+        phone:     form.phone.value.trim(),
+      };
+
+      if (!data.firstName || !data.lastName || !data.lotNumber || !data.email) {
+        showError('Please fill out every field before submitting.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Joining…';
+      submitArrow.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        let body = null;
+        try { body = await res.json(); } catch (_) { /* non-JSON response */ }
+
+        if (!res.ok || !body || body.ok !== true) {
+          const msg = (body && body.error) ? body.error : 'Something went wrong. Please try again in a moment.';
+          showError(msg);
+          submitBtn.disabled = false;
+          submitLabel.textContent = 'Join the List';
+          submitArrow.style.display = '';
+          return;
+        }
+
+        form.style.display = 'none';
+        successPanel.classList.add('visible');
+      } catch (err) {
+        showError("We couldn't reach the server. Please check your connection and try again.");
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Join the List';
+        submitArrow.style.display = '';
+      }
+    });
+  </script>
+
+</body>
+</html>

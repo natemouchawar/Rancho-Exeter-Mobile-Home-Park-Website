@@ -4,3 +4,6 @@ temporary screenshots/
 settings.json
 node_modules/
 Screenshot*
+.env
+.env.local
+.vercel/

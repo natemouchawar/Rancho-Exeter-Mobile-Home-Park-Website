@@ -388,35 +388,6 @@
     .btn-cream-outline:active { transform: scale(0.98); }
     .btn-cream-outline:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
 
-    /* ─── CONTACT FORM ─── */
-    .form-group { margin-bottom: 28px; }
-    .form-label {
-      display: block;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #96847a;
-      margin-bottom: 10px;
-    }
-    .form-input {
-      display: block;
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(238,235,228,0.22);
-      padding: 10px 0;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: #EEEBE4;
-      outline: none;
-      transition: border-color 0.25s ease;
-    }
-    .form-input::placeholder { color: rgba(238,235,228,0.3); }
-    .form-input:focus { border-color: rgba(238,235,228,0.7); }
-    .form-input:focus-visible { border-color: rgba(238,235,228,0.9); }
-    textarea.form-input { resize: vertical; min-height: 90px; }
-
     /* ─── ANIMATIONS ─── */
     .fade-up {
       opacity: 0;
@@ -449,7 +420,6 @@
     @media (max-width: 540px) {
       .amenity-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -867,97 +837,78 @@
 ═══════════════════════════════════════════════════════ -->
 <section id="contact" class="section" style="background:#313131;">
   <div class="container">
-    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start;">
+    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;">
 
-      <!-- Left: info -->
+      <!-- Left: intro -->
       <div class="fade-up">
         <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(238,235,228,0.4);margin-bottom:22px;">Get In Touch</p>
         <h2 class="display" style="font-size:clamp(40px,5.5vw,66px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#EEEBE4;margin-bottom:0;">
           Ready to<br><em>Make a Move?</em>
         </h2>
         <div class="divider" style="background:rgba(238,235,228,0.25);"></div>
-        <p style="font-size:15px;line-height:1.78;color:rgba(238,235,228,0.58);margin-bottom:52px;">
+        <p style="font-size:15px;line-height:1.78;color:rgba(238,235,228,0.58);">
           Our team is here to answer your questions, schedule tours, and help you find your perfect home. Reach out — we'd love to hear from you.
         </p>
-
-        <div style="display:flex;flex-direction:column;gap:36px;">
-
-          <a href="tel:+19494631167"
-             style="display:flex;align-items:flex-start;gap:20px;text-decoration:none;color:#EEEBE4;transition:opacity 0.2s ease;"
-             onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
-            <div>
-              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Phone</div>
-              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">(949) 463-1167</div>
-            </div>
-          </a>
-
-          <a href="https://ranchoexetermhp.com"
-             target="_blank" rel="noopener"
-             style="display:flex;align-items:flex-start;gap:20px;text-decoration:none;color:#EEEBE4;transition:opacity 0.2s ease;"
-             onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
-            <div>
-              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Website</div>
-              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">ranchoexetermhp.com</div>
-            </div>
-          </a>
-
-          <div style="display:flex;align-items:flex-start;gap:20px;color:#EEEBE4;">
-            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
-            <div>
-              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Address</div>
-              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1.4;">314 N Albert<br>Exeter, CA 93221</div>
-            </div>
-          </div>
-
-          <div style="display:flex;align-items:flex-start;gap:20px;color:#EEEBE4;">
-            <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
-            <div>
-              <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Office Hours</div>
-              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">Mon – Fri, 9am – 5pm</div>
-            </div>
-          </div>
-
-        </div>
       </div>
 
-      <!-- Right: form -->
-      <div class="fade-up" style="transition-delay:0.18s;">
-        <form onsubmit="handleSubmit(event)" id="contact-form">
-          <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:0 32px;">
-            <div class="form-group">
-              <label class="form-label">First Name</label>
-              <input type="text" class="form-input" placeholder="Jane" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Last Name</label>
-              <input type="text" class="form-input" placeholder="Smith" required />
-            </div>
+      <!-- Right: contact details -->
+      <div class="fade-up" style="transition-delay:0.18s;display:flex;flex-direction:column;gap:36px;">
+
+        <a href="tel:+19494631167"
+           style="display:flex;align-items:flex-start;gap:20px;text-decoration:none;color:#EEEBE4;transition:opacity 0.2s ease;"
+           onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+          <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+          <div>
+            <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Phone</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">(949) 463-1167</div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" placeholder="jane@example.com" required />
+        </a>
+
+        <a href="mailto:office@ranchoexetermhp.com"
+           style="display:flex;align-items:flex-start;gap:20px;text-decoration:none;color:#EEEBE4;transition:opacity 0.2s ease;"
+           onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+          <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+          <div>
+            <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Email</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">office@ranchoexetermhp.com</div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Phone <span style="color:rgba(238,235,228,0.3);font-weight:300;">— optional</span></label>
-            <input type="tel" class="form-input" placeholder="(949) 000-0000" />
+        </a>
+
+        <div style="display:flex;align-items:flex-start;gap:20px;color:#EEEBE4;">
+          <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+          <div>
+            <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Address</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1.4;">314 N Albert<br>Exeter, CA 93221</div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-input" placeholder="Tell us what you're looking for…" rows="4"></textarea>
-          </div>
-          <button type="submit" class="btn-cream-outline" style="width:100%;justify-content:center;margin-top:8px;">
-            Send Message
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </form>
-        <div id="form-success" style="display:none;padding:48px 0;text-align:center;">
-          <div class="display" style="font-size:36px;font-weight:300;color:#EEEBE4;margin-bottom:12px;font-style:italic;">Message Sent</div>
-          <p style="font-size:14px;color:rgba(238,235,228,0.55);">Thank you for reaching out. We'll be in touch shortly.</p>
         </div>
+
+        <div style="display:flex;align-items:flex-start;gap:20px;color:#EEEBE4;">
+          <div style="width:1px;height:44px;background:#96847a;flex-shrink:0;margin-top:2px;"></div>
+          <div>
+            <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#96847a;margin-bottom:5px;">Office Hours</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;">Mon – Fri, 9am – 5pm</div>
+          </div>
+        </div>
+
       </div>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     RESIDENT EMAIL CTA
+═══════════════════════════════════════════════════════ -->
+<section style="background:#313131;padding:0 56px 56px;">
+  <div class="container">
+    <div style="border-top:1px solid rgba(238,235,228,0.09);padding-top:44px;display:flex;justify-content:center;">
+      <a href="/join"
+         style="font-size:13px;letter-spacing:0.08em;color:rgba(238,235,228,0.55);text-decoration:none;display:inline-flex;align-items:center;gap:12px;transition:color 0.25s ease;"
+         onmouseover="this.style.color='#EEEBE4'" onmouseout="this.style.color='rgba(238,235,228,0.55)'">
+        Are you a resident? Join our email list
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -979,6 +930,7 @@
         <a href="#community" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Community</a>
         <a href="#amenities" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Amenities</a>
         <a href="#homes" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Available Homes</a>
+        <a href="/join" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Resident Email List</a>
         <a href="#contact" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Contact</a>
       </div>
 
@@ -1061,13 +1013,6 @@
     });
   }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
   fadeEls.forEach(el => io.observe(el));
-
-  // Contact form
-  function handleSubmit(e) {
-    e.preventDefault();
-    document.getElementById('contact-form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }
 
 </script>
 </body>
