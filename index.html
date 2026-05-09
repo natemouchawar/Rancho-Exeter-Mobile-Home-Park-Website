@@ -48,7 +48,7 @@
       transition: color 0.3s ease;
     }
     #navbar.scrolled .nav-logo { color: #313131; }
-    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-links { display: flex; align-items: center; gap: 18px; }
     .nav-link {
       font-size: 12px;
       font-weight: 400;
@@ -78,6 +78,33 @@
     .nav-cta:active { transform: scale(0.98); }
     #navbar.scrolled .nav-cta { background: #96847a; border-color: #96847a; color: #EEEBE4; }
     #navbar.scrolled .nav-cta:hover { background: #7a6a60; border-color: #7a6a60; }
+
+    /* Outlined nav button — secondary CTA */
+    .nav-link-outline {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #EEEBE4;
+      background: transparent;
+      border: 1px solid rgba(238,235,228,0.45);
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .nav-link-outline:hover { background: rgba(238,235,228,0.1); border-color: rgba(238,235,228,0.8); }
+    .nav-link-outline:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
+    .nav-link-outline:active { transform: scale(0.98); }
+    #navbar.scrolled .nav-link-outline {
+      color: #313131;
+      border-color: rgba(49,49,49,0.35);
+    }
+    #navbar.scrolled .nav-link-outline:hover {
+      background: #313131;
+      color: #EEEBE4;
+      border-color: #313131;
+    }
 
     /* Hamburger */
     .hamburger {
@@ -218,6 +245,52 @@
       transition: width 0.35s ease;
     }
     .hero-cta:hover .hero-cta-line { width: 64px; }
+
+    /* Primary hero button */
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #313131;
+      background: #EEEBE4;
+      border: 1px solid #EEEBE4;
+      padding: 17px 38px;
+      text-decoration: none;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .hero-cta-btn:hover {
+      background: transparent;
+      color: #EEEBE4;
+      border-color: rgba(238,235,228,0.6);
+    }
+    .hero-cta-btn:active { transform: scale(0.98); }
+    .hero-cta-btn:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
+    .hero-cta-btn svg { transition: transform 0.3s ease; }
+    .hero-cta-btn:hover svg { transform: translateX(4px); }
+
+    /* Paired button group — hero + section CTAs */
+    .btn-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+    @media (max-width: 540px) {
+      .btn-pair {
+        flex-direction: column;
+        gap: 14px;
+      }
+      .btn-pair > * {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
     .scroll-hint {
       position: absolute;
       bottom: 36px; left: 50%;
@@ -432,9 +505,8 @@
   <a href="#" class="nav-logo">Rancho Exeter</a>
 
   <div class="nav-links">
-    <a href="#community" class="nav-link">Community</a>
-    <a href="#amenities" class="nav-link">Amenities</a>
-    <a href="#homes" class="nav-link">Available Homes</a>
+    <a href="/homes" class="nav-link-outline">Available Homes &amp; Spaces</a>
+    <a href="/welcome-offer" class="nav-link-outline">Welcome Offer</a>
     <a href="#contact" class="nav-cta">Contact Us</a>
   </div>
 
@@ -448,9 +520,8 @@
 <div id="mobile-overlay"></div>
 
 <div id="mobile-menu" role="dialog" aria-label="Navigation">
-  <a href="#community" class="mobile-nav-link">Community</a>
-  <a href="#amenities" class="mobile-nav-link">Amenities</a>
-  <a href="#homes" class="mobile-nav-link">Available Homes</a>
+  <a href="/homes" class="mobile-nav-link">Available Homes &amp; Spaces</a>
+  <a href="/welcome-offer" class="mobile-nav-link">Welcome Offer</a>
   <a href="#contact" class="mobile-nav-link" style="color:#96847a;">Contact Us</a>
   <div style="margin-top:auto;padding-top:40px;border-top:1px solid rgba(49,49,49,0.1);">
     <p style="font-size:13px;color:rgba(49,49,49,0.45);line-height:1.6;">314 N Albert<br>Exeter, CA 93221</p>
@@ -475,10 +546,16 @@
     <h1 class="hero-title">
       A Community<br><em>to Call Home</em>
     </h1>
-    <a href="#community" class="hero-cta">
-      <span class="hero-cta-line"></span>
-      Discover Our Community
-    </a>
+    <div class="btn-pair">
+      <a href="/homes" class="hero-cta-btn">
+        View Available Homes
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/welcome-offer" class="hero-cta-btn">
+        Welcome Offer
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
   </div>
 
   <div class="scroll-hint">
@@ -526,7 +603,7 @@
             <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Years Established</div>
           </div>
           <div>
-            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">131</div>
+            <div class="display" style="font-size:52px;font-weight:300;color:#313131;line-height:1;">139</div>
             <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#96847a;margin-top:6px;">Resident Homes</div>
           </div>
           <div>
@@ -554,42 +631,6 @@
     </div>
     <div class="gallery-item fade-up" style="transition-delay:0.22s;">
       <img src="brand_assets/IMG_4345.jpeg" alt="Rancho Exeter street view" style="object-position: center 55%;" />
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     AVAILABLE HOMES
-═══════════════════════════════════════════════════════ -->
-<section id="homes" class="section" style="background:#EEEBE4;">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:60px;">
-      <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Real Estate</p>
-      <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
-        Available <em>Homes</em>
-      </h2>
-      <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
-    </div>
-
-    <!-- Listing card -->
-    <div class="fade-up" style="max-width:480px;margin:0 auto;background:#fff;box-shadow:0 2px 24px rgba(49,49,49,0.07),0 1px 4px rgba(49,49,49,0.04);transition-delay:0.2s;">
-      <div style="overflow:hidden;aspect-ratio:16/10;position:relative;">
-        <img src="brand_assets/home-101.png" alt="314 N Albert Avenue 101, Exeter CA"
-             style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.97) contrast(1.08) saturate(1.1);transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);"
-             onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(49,49,49,0.28) 0%,transparent 55%);pointer-events:none;"></div>
-      </div>
-      <div style="padding:32px 36px 36px;">
-        <p style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#96847a;margin-bottom:12px;">For Sale</p>
-        <div class="display" style="font-size:32px;font-weight:300;color:#313131;line-height:1.1;margin-bottom:4px;">$59,000 <span style="font-size:18px;color:rgba(49,49,49,0.45);font-weight:300;">USD</span></div>
-        <div style="width:36px;height:1px;background:#96847a;margin:16px 0;"></div>
-        <p style="font-size:14px;line-height:1.7;color:rgba(49,49,49,0.65);">314 N Albert Avenue, Unit 101<br>Exeter, CA 93221</p>
-        <a href="#contact" class="btn-outline-dark" style="margin-top:28px;width:100%;justify-content:center;">
-          Inquire About This Home
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -800,6 +841,35 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
+     NOW AVAILABLE
+═══════════════════════════════════════════════════════ -->
+<section id="now-available" class="section" style="background:#EEEBE4;padding-top:0;">
+  <div class="container">
+    <div style="text-align:center;max-width:620px;margin:0 auto;">
+      <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#96847a;margin-bottom:22px;">Now Available</p>
+      <h2 class="display fade-up" style="font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:0.95;letter-spacing:-0.025em;color:#313131;transition-delay:0.1s;">
+        Homes &amp; Spaces<br><em>Ready for You</em>
+      </h2>
+      <div class="divider divider-center fade-up" style="transition-delay:0.16s;"></div>
+      <p class="fade-up" style="font-size:16px;line-height:1.78;color:rgba(49,49,49,0.7);margin-bottom:40px;transition-delay:0.2s;">
+        We currently have homes for sale and open spaces for residents bringing their own home. Browse our listings, photos, and pricing details.
+      </p>
+      <div class="btn-pair fade-up" style="transition-delay:0.24s;">
+        <a href="/homes" class="btn-outline-dark">
+          View Available Homes &amp; Spaces
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="/welcome-offer" class="btn-outline-dark">
+          Welcome Offer
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
      GOOGLE MAPS
 ═══════════════════════════════════════════════════════ -->
 <section id="location" style="background:#313131;padding:64px 56px;">
@@ -929,7 +999,8 @@
       <div style="display:flex;gap:36px;flex-wrap:wrap;align-items:center;">
         <a href="#community" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Community</a>
         <a href="#amenities" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Amenities</a>
-        <a href="#homes" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Available Homes</a>
+        <a href="/homes" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Available Homes &amp; Spaces</a>
+        <a href="/welcome-offer" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Welcome Offer</a>
         <a href="/join" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Resident Email List</a>
         <a href="#contact" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Contact</a>
       </div>

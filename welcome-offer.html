@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Offer — Rancho Exeter Mobile Home Park</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background-color: #EEEBE4;
+      color: #313131;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .display { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* ─── NAVBAR ─── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 44px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    #navbar.scrolled {
+      background-color: rgba(238, 235, 228, 0.97);
+      padding: 20px 56px;
+      box-shadow: 0 1px 0 rgba(49,49,49,0.07);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #EEEBE4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    #navbar.scrolled .nav-logo { color: #313131; }
+    .nav-links { display: flex; align-items: center; gap: 18px; }
+    .nav-link-outline {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #EEEBE4;
+      background: transparent;
+      border: 1px solid rgba(238,235,228,0.45);
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .nav-link-outline:hover { background: rgba(238,235,228,0.1); border-color: rgba(238,235,228,0.8); }
+    .nav-link-outline:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
+    .nav-link-outline:active { transform: scale(0.98); }
+    #navbar.scrolled .nav-link-outline {
+      color: #313131;
+      border-color: rgba(49,49,49,0.35);
+    }
+    #navbar.scrolled .nav-link-outline:hover {
+      background: #313131;
+      color: #EEEBE4;
+      border-color: #313131;
+    }
+    .nav-cta {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #313131;
+      background: #EEEBE4;
+      border: 1px solid #EEEBE4;
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .nav-cta:hover { background: transparent; color: #EEEBE4; border-color: rgba(238,235,228,0.6); }
+    .nav-cta:focus-visible { outline: 2px solid #EEEBE4; outline-offset: 3px; }
+    .nav-cta:active { transform: scale(0.98); }
+    #navbar.scrolled .nav-cta { background: #96847a; border-color: #96847a; color: #EEEBE4; }
+    #navbar.scrolled .nav-cta:hover { background: #7a6a60; border-color: #7a6a60; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: #EEEBE4;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #navbar.scrolled .hamburger span { background: #313131; }
+
+    /* Mobile overlay + menu */
+    #mobile-overlay {
+      position: fixed; inset: 0;
+      z-index: 98;
+      background: rgba(49,49,49,0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    #mobile-overlay.active { opacity: 1; pointer-events: all; }
+    #mobile-menu {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: #EEEBE4;
+      z-index: 99;
+      padding: 88px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -4px 0 60px rgba(49,49,49,0.15);
+    }
+    #mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1;
+      color: #313131;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .mobile-nav-link:hover { color: #96847a; }
+    .mobile-nav-link:focus-visible { outline: 2px solid #96847a; outline-offset: 4px; }
+
+    /* ─── HERO (matches homepage hero) ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      overflow: hidden;
+    }
+    .hero-img-wrap { position: absolute; inset: 0; }
+    .hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      filter: brightness(0.72) contrast(1.22) saturate(1.12);
+    }
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: rgba(120,100,85,0.18);
+      mix-blend-mode: multiply;
+    }
+    .hero-grad {
+      position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(to bottom,
+          rgba(30,25,20,0.55) 0%,
+          rgba(30,25,20,0.12) 25%,
+          rgba(30,25,20,0.04) 50%,
+          rgba(30,25,20,0.45) 72%,
+          rgba(30,25,20,0.72) 100%
+        );
+    }
+    .hero-content {
+      position: relative; z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      padding: 0 32px 14vh;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(238,235,228,0.65);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 10vw, 118px);
+      font-weight: 300;
+      line-height: 0.93;
+      letter-spacing: -0.025em;
+      color: #EEEBE4;
+      margin-bottom: 22px;
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subhead {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(20px, 2.6vw, 28px);
+      line-height: 1.4;
+      color: rgba(238,235,228,0.78);
+      max-width: 560px;
+    }
+
+    /* ─── LAYOUT ─── */
+    .section { padding: 104px 56px; }
+    .container { max-width: 1240px; margin: 0 auto; }
+    .divider {
+      width: 44px; height: 1px;
+      background: #96847a;
+      margin: 28px 0;
+    }
+    .divider-center { margin-left: auto; margin-right: auto; }
+
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #96847a;
+      margin-bottom: 22px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5.5vw, 60px);
+      font-weight: 300;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      color: #313131;
+      margin-bottom: 12px;
+    }
+    .section-title em { font-style: italic; }
+    .section-body {
+      font-size: 17px;
+      line-height: 1.78;
+      color: rgba(49,49,49,0.74);
+      max-width: 640px;
+    }
+    .section-body p + p { margin-top: 22px; }
+
+    /* Two-column section: text left, narrative right (or reversed) */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 88px;
+      align-items: start;
+    }
+    .offer-grid .heading-col { padding-top: 8px; }
+
+    /* ─── BUTTONS ─── */
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #313131;
+      background: transparent;
+      border: 1px solid rgba(49,49,49,0.35);
+      padding: 15px 36px;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 1px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .btn-outline-dark:hover { background: #313131; color: #EEEBE4; border-color: #313131; }
+    .btn-outline-dark:active { transform: scale(0.98); }
+    .btn-outline-dark:focus-visible { outline: 2px solid #313131; outline-offset: 3px; }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .section { padding: 80px 40px; }
+      #navbar { padding: 24px 40px; }
+      #navbar.scrolled { padding: 16px 40px; }
+      .offer-grid { gap: 56px; }
+    }
+    @media (max-width: 768px) {
+      #navbar { padding: 20px 24px; }
+      #navbar.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 24px; }
+      .offer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-title { font-size: clamp(52px, 13vw, 82px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="/" class="nav-logo">Rancho Exeter</a>
+
+  <div class="nav-links">
+    <a href="/homes" class="nav-link-outline">Available Homes &amp; Spaces</a>
+    <a href="/welcome-offer" class="nav-link-outline" aria-current="page">Welcome Offer</a>
+    <a href="/#contact" class="nav-cta">Contact Us</a>
+  </div>
+
+  <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span id="ham1"></span>
+    <span id="ham2"></span>
+    <span id="ham3"></span>
+  </button>
+</nav>
+
+<div id="mobile-overlay"></div>
+
+<div id="mobile-menu" role="dialog" aria-label="Navigation">
+  <a href="/" class="mobile-nav-link">Home</a>
+  <a href="/homes" class="mobile-nav-link">Available Homes &amp; Spaces</a>
+  <a href="/welcome-offer" class="mobile-nav-link" aria-current="page">Welcome Offer</a>
+  <a href="/#contact" class="mobile-nav-link" style="color:#96847a;">Contact Us</a>
+  <div style="margin-top:auto;padding-top:40px;border-top:1px solid rgba(49,49,49,0.1);">
+    <p style="font-size:13px;color:rgba(49,49,49,0.45);line-height:1.6;">314 N Albert<br>Exeter, CA 93221</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-img-wrap">
+    <img
+      src="brand_assets/IMG_4345.jpeg"
+      alt="Rancho Exeter Mobile Home Park community street view"
+    />
+  </div>
+  <div class="hero-grad"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">A Welcome Offer</p>
+    <h1 class="hero-title">Welcome <em>Home</em></h1>
+    <p class="hero-subhead">Our way of saying we're glad you're here.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOR NEW RESIDENTS
+═══════════════════════════════════════════════════════ -->
+<section class="section" style="background:#EEEBE4;">
+  <div class="container">
+    <div class="offer-grid">
+
+      <div class="heading-col fade-up">
+        <p class="section-eyebrow">For New Residents</p>
+        <h2 class="section-title">A House-Warming<br><em>From Us</em></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="section-body fade-up" style="transition-delay:0.15s;">
+        <p>Moving into a new community is a meaningful step, and we want yours to feel easy from the very first day. Anyone who moves a new mobile home into Rancho Exeter receives three months of free lot rent.</p>
+        <p>Consider it our way of welcoming you. Use those months to settle in, meet your neighbors, and let Rancho Exeter start to feel like home — without the rent on your mind.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     A WELCOME WORTH SHARING
+═══════════════════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="offer-grid">
+
+      <div class="heading-col fade-up">
+        <p class="section-eyebrow">A Welcome Worth Sharing</p>
+        <h2 class="section-title">For Residents Who<br><em>Refer a Neighbor</em></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="section-body fade-up" style="transition-delay:0.15s;">
+        <p>The best parts of life here are the people, and the strongest communities grow when residents bring along the friends and family they love most.</p>
+        <p>Current residents who refer a new neighbor — someone who moves a home into Rancho Exeter — receive three months of free lot rent as our thank-you. The welcome you give a new neighbor is worth as much as the one we extend ourselves.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HAVE QUESTIONS?
+═══════════════════════════════════════════════════════ -->
+<section class="section" style="background:#313131;text-align:center;">
+  <div class="container" style="max-width:680px;">
+    <p class="fade-up" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(238,235,228,0.5);margin-bottom:22px;">Reach Out</p>
+    <h2 class="display fade-up" style="font-size:clamp(40px,5.5vw,60px);font-weight:300;line-height:0.98;letter-spacing:-0.025em;color:#EEEBE4;margin-bottom:22px;transition-delay:0.1s;">
+      Have <em>Questions?</em>
+    </h2>
+    <div class="divider divider-center fade-up" style="background:rgba(238,235,228,0.3);transition-delay:0.16s;"></div>
+    <p class="fade-up" style="font-size:16px;line-height:1.78;color:rgba(238,235,228,0.7);margin-bottom:40px;transition-delay:0.2s;">
+      Our office is happy to walk through the details — eligibility, timing, and what it looks like to bring your home or refer a neighbor. We'd love to hear from you.
+    </p>
+    <a href="/#contact"
+       class="fade-up"
+       style="display:inline-flex;align-items:center;justify-content:center;gap:12px;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#313131;background:#EEEBE4;border:1px solid #EEEBE4;padding:15px 36px;text-decoration:none;border-radius:1px;transition:background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;transition-delay:0.24s;"
+       onmouseover="this.style.background='transparent';this.style.color='#EEEBE4';this.style.borderColor='rgba(238,235,228,0.6)'"
+       onmouseout="this.style.background='#EEEBE4';this.style.color='#313131';this.style.borderColor='#EEEBE4'">
+      Contact Us
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer style="background:#1a1a1a;padding:64px 56px 36px;">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(238,235,228,0.07);">
+
+      <div>
+        <div class="display" style="font-size:18px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:#EEEBE4;margin-bottom:8px;">Rancho Exeter</div>
+        <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(238,235,228,0.3);">Mobile Home Park · Exeter, CA</div>
+      </div>
+
+      <div style="display:flex;gap:36px;flex-wrap:wrap;align-items:center;">
+        <a href="/" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Home</a>
+        <a href="/homes" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Available Homes &amp; Spaces</a>
+        <a href="/welcome-offer" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Welcome Offer</a>
+        <a href="/join" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Resident Email List</a>
+        <a href="/#contact" style="font-size:12px;color:rgba(238,235,228,0.45);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(238,235,228,0.85)'" onmouseout="this.style.color='rgba(238,235,228,0.45)'">Contact</a>
+      </div>
+
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:32px;">
+      <p style="font-size:11px;color:rgba(238,235,228,0.22);">© 2026 Rancho Exeter Mobile Home Park. All rights reserved.</p>
+      <p style="font-size:11px;color:rgba(238,235,228,0.16);">Equal Housing Opportunity · 314 N Albert, Exeter CA 93221</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════ -->
+<script>
+  // Nav scroll behavior
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Mobile menu
+  const toggle    = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay   = document.getElementById('mobile-overlay');
+  const ham1      = document.getElementById('ham1');
+  const ham2      = document.getElementById('ham2');
+  const ham3      = document.getElementById('ham3');
+  let menuOpen    = false;
+
+  function openMenu() {
+    menuOpen = true;
+    mobileMenu.classList.add('open');
+    overlay.classList.add('active');
+    toggle.setAttribute('aria-expanded', 'true');
+    ham1.style.transform = 'translateY(6.5px) rotate(45deg)';
+    ham2.style.opacity   = '0';
+    ham3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    overlay.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+    ham1.style.transform = '';
+    ham2.style.opacity   = '1';
+    ham3.style.transform = '';
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+  overlay.addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Preview mode
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('preview') || params.has('compact')) {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      el.style.transition = 'none';
+      el.classList.add('visible');
+    });
+  }
+
+  // Scroll fade-in
+  const fadeEls = document.querySelectorAll('.fade-up:not(.visible)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  fadeEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
