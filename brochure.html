@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rancho Exeter — Tri-Fold Brochure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    @page { size: 11in 8.5in; margin: 0; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #d6d3cc; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      color: #313131;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .display { font-family: 'Cormorant Garamond', Georgia, serif; }
+    em { font-style: italic; }
+
+    /* ─── Page + panel skeleton ─── */
+    .page {
+      width: 11in;
+      height: 8.5in;
+      display: flex;
+      margin: 24px auto;
+      background: #fff;
+      box-shadow: 0 2px 28px rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+    .panel {
+      width: 3.667in;
+      height: 8.5in;
+      flex: none;
+      position: relative;
+      overflow: hidden;
+      padding: 0.5in 0.38in;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel--cover { padding: 0; }
+
+    @media print {
+      html, body { background: #fff; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-of-type { page-break-after: auto; }
+    }
+
+    /* ─── Shared text styles ─── */
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #96847a;
+    }
+    .eyebrow--cream { color: rgba(238,235,228,0.55); }
+    .h-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      color: #313131;
+    }
+    .h-display--cream { color: #EEEBE4; }
+    .body-sm {
+      font-size: 11.5px;
+      line-height: 1.7;
+      color: rgba(49,49,49,0.74);
+    }
+    .rule {
+      width: 36px;
+      height: 1px;
+      background: #96847a;
+      border: 0;
+    }
+    .rule--cream { background: rgba(238,235,228,0.3); }
+
+    .label {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #96847a;
+    }
+
+    /* ─── Bullet list (amenities + nearby) ─── */
+    .bullet-row {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+    }
+    .bullet-dot {
+      width: 5px;
+      height: 5px;
+      background: #96847a;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transform: translateY(-2px);
+    }
+    .item-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #313131;
+      line-height: 1.1;
+    }
+    .item-desc {
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: rgba(49,49,49,0.6);
+      margin-left: 14px;
+      margin-top: 2px;
+    }
+
+    /* ─── Cover image treatment ─── */
+    .cover-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 78% 45%;
+      filter: brightness(0.78) contrast(1.18) saturate(1.1);
+    }
+    .cover-tint {
+      position: absolute;
+      inset: 0;
+      background: rgba(150,132,122,0.1);
+      mix-blend-mode: multiply;
+    }
+    .cover-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,26,26,0.55) 0%,
+        rgba(26,26,26,0.04) 22%,
+        rgba(26,26,26,0.04) 42%,
+        rgba(26,26,26,0.85) 65%,
+        rgba(26,26,26,0.97) 100%
+      );
+    }
+
+    /* ─── Reusable callout boxes ─── */
+    .callout {
+      padding: 16px 16px 18px;
+      border-left: 2px solid #96847a;
+    }
+    .callout--cream {
+      background: #EEEBE4;
+      color: #313131;
+    }
+    .callout--dark {
+      background: #1a1a1a;
+      color: #EEEBE4;
+      border-left-color: #96847a;
+    }
+
+    .pill-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 11px 20px;
+      border-radius: 1px;
+      text-decoration: none;
+    }
+    .pill-cta--taupe {
+      color: #EEEBE4;
+      background: #96847a;
+    }
+    .pill-cta--cream {
+      color: #1a1a1a;
+      background: #EEEBE4;
+    }
+
+    /* Optional fold-line guides for on-screen review only */
+    .page::before, .page::after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: rgba(49,49,49,0.06);
+      top: 0;
+      pointer-events: none;
+    }
+    .page { position: relative; }
+    .page::before { left: calc(11in / 3); }
+    .page::after { left: calc(22in / 3); }
+    @media print {
+      .page::before, .page::after { display: none; }
+    }
+
+    /* Solo-page review: append #outside or #inside to URL to hide the other side */
+    body:not(:has(:target)) [data-page] { display: flex; }
+    body:has(#outside:target) [data-page="inside"] { display: none; }
+    body:has(#inside:target) [data-page="outside"] { display: none; }
+  </style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE 1 — OUTSIDE
+     [ Inside flap ] [ Back cover ] [ Front cover ]
+═══════════════════════════════════════════════════════ -->
+<div class="page" data-page="outside" id="outside">
+
+  <!-- ── Panel 1: INSIDE FLAP (cream, welcome + stats + photo) ── -->
+  <div class="panel" style="background:#EEEBE4;">
+
+    <p class="eyebrow" style="margin-bottom:14px;">Our Community</p>
+    <h2 class="h-display" style="font-size:38px;">
+      Welcome to<br><em>Rancho Exeter</em>
+    </h2>
+    <hr class="rule" style="margin:18px 0;" />
+
+    <p class="body-sm" style="margin-bottom:12px;">
+      Rancho Exeter is a welcoming 55+ senior community nestled in the heart of Exeter, California. For over four decades, we've offered peaceful, affordable living designed for those who have earned a little more ease — surrounded by neighbors who feel like friends.
+    </p>
+    <p class="body-sm">
+      With professional on-site management, responsive maintenance, and a warm community atmosphere, life at Rancho Exeter is as comfortable as it is connected.
+    </p>
+
+    <!-- Stats row -->
+    <div style="display:flex;justify-content:space-between;text-align:center;margin:22px 0 18px;padding:18px 0;border-top:1px solid rgba(150,132,122,0.4);border-bottom:1px solid rgba(150,132,122,0.4);">
+      <div>
+        <div class="display" style="font-size:34px;font-weight:300;color:#313131;line-height:1;">45<span style="font-size:22px;">+</span></div>
+        <div class="label" style="margin-top:6px;">Years</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:34px;font-weight:300;color:#313131;line-height:1;">139</div>
+        <div class="label" style="margin-top:6px;">Homes</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:34px;font-weight:300;color:#313131;line-height:1;">15</div>
+        <div class="label" style="margin-top:6px;">Acres</div>
+      </div>
+    </div>
+
+    <!-- Photo at bottom -->
+    <div style="margin-top:auto;position:relative;overflow:hidden;">
+      <img src="brand_assets/IMG_4324.jpeg" alt="Rancho Exeter community pool" style="width:100%;height:175px;object-fit:cover;display:block;filter:brightness(0.92) contrast(1.14) saturate(1.18);" />
+      <div style="position:absolute;inset:0;background:rgba(150,132,122,0.1);mix-blend-mode:multiply;"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,0.65) 0%, transparent 55%);"></div>
+      <div class="display" style="position:absolute;left:14px;right:14px;bottom:12px;color:#EEEBE4;font-style:italic;font-size:12.5px;line-height:1.4;font-weight:300;">
+        "The quiet you're looking for — and the neighbors who make it feel like home."
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── Panel 2: BACK COVER (dark, contact + welcome offer) ── -->
+  <div class="panel" style="background:#1a1a1a;color:#EEEBE4;">
+
+    <!-- Wordmark -->
+    <div>
+      <div class="display" style="font-size:20px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#EEEBE4;line-height:1.15;">
+        Rancho<br>Exeter
+      </div>
+      <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(238,235,228,0.45);margin-top:8px;">
+        Mobile Home Park · Est. 1978
+      </div>
+    </div>
+    <hr class="rule rule--cream" style="margin:22px 0;" />
+
+    <!-- Get In Touch -->
+    <div>
+      <p class="eyebrow eyebrow--cream" style="margin-bottom:10px;color:#96847a;">Get In Touch</p>
+      <h2 class="h-display h-display--cream" style="font-size:34px;">
+        Ready to make<br><em>a move?</em>
+      </h2>
+      <p style="font-size:11.5px;line-height:1.65;color:rgba(238,235,228,0.6);margin-top:14px;">
+        Schedule a tour, ask about availability, or simply say hello.
+      </p>
+    </div>
+
+    <!-- Contact rows -->
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:22px;">
+      <div>
+        <div class="label" style="margin-bottom:3px;">Phone</div>
+        <div class="display" style="font-size:16px;font-weight:300;color:#EEEBE4;">(949) 463-1167</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:3px;">Email</div>
+        <div class="display" style="font-size:14px;font-weight:300;color:#EEEBE4;">office@ranchoexetermhp.com</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:3px;">Address</div>
+        <div class="display" style="font-size:14px;font-weight:300;line-height:1.4;color:#EEEBE4;">
+          314 N Albert<br>Exeter, CA 93221
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:3px;">Office Hours</div>
+        <div class="display" style="font-size:14px;font-weight:300;color:#EEEBE4;">Mon – Fri, 9am – 5pm</div>
+      </div>
+    </div>
+
+    <!-- Welcome Offer callout (pushed to bottom) -->
+    <div class="callout callout--cream" style="margin-top:auto;">
+      <p class="eyebrow" style="margin-bottom:8px;">A Welcome Gift</p>
+      <h3 class="h-display" style="font-size:22px;">
+        Three months <em>free</em> lot rent.
+      </h3>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font-size:10.5px;line-height:1.55;color:rgba(49,49,49,0.72);">
+        <div>· For new residents moving a home into Rancho Exeter.</div>
+        <div>· For current residents who refer a new neighbor.</div>
+      </div>
+      <p style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#96847a;margin-top:12px;">
+        Ask us how →
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- ── Panel 3: FRONT COVER (photo top, text band bottom) ── -->
+  <div class="panel panel--cover" style="background:#1a1a1a;display:flex;flex-direction:column;">
+
+    <!-- Top: photo zone (~52% of panel height) -->
+    <div style="position:relative;flex:0 0 4.4in;overflow:hidden;">
+      <img src="brand_assets/IMG_4348.jpeg" alt="Rancho Exeter entrance sign with bougainvillea"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:78% 45%;filter:brightness(0.92) contrast(1.16) saturate(1.12);" />
+      <div style="position:absolute;inset:0;background:rgba(150,132,122,0.08);mix-blend-mode:multiply;"></div>
+      <!-- Subtle top gradient so eyebrow stays legible against sky -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,26,26,0.45),transparent 35%);"></div>
+
+      <!-- Top eyebrow over photo -->
+      <div style="position:absolute;top:0.5in;left:0.4in;right:0.4in;color:#EEEBE4;">
+        <p style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(238,235,228,0.92);">Exeter, California</p>
+        <p style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(238,235,228,0.65);margin-top:5px;">Established 1978</p>
+      </div>
+    </div>
+
+    <!-- Bottom: solid text band (~48% of panel height) -->
+    <div style="flex:1 1 auto;background:#1a1a1a;color:#EEEBE4;padding:0.4in 0.4in 0.45in;display:flex;flex-direction:column;">
+
+      <div class="display" style="font-size:16px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#EEEBE4;line-height:1.2;">
+        Rancho<br>Exeter
+      </div>
+      <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(238,235,228,0.55);margin-top:6px;">
+        Mobile Home Park
+      </div>
+
+      <h1 class="display" style="font-size:38px;font-weight:300;line-height:1.0;letter-spacing:-0.025em;color:#EEEBE4;margin-top:20px;">
+        A Community<br><em>to Call Home</em>
+      </h1>
+
+      <div class="pill-cta pill-cta--taupe" style="margin-top:auto;align-self:flex-start;">
+        Discover More Inside
+        <svg width="10" height="10" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div style="font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(238,235,228,0.5);margin-top:14px;">
+        ranchoexetermhp.com
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE 2 — INSIDE
+     [ Lifestyle ] [ Amenities ] [ Nearby ]
+═══════════════════════════════════════════════════════ -->
+<div class="page" data-page="inside" id="inside">
+
+  <!-- ── Panel 1: LIFESTYLE (cream + photo + sidebar) ── -->
+  <div class="panel" style="background:#EEEBE4;">
+
+    <p class="eyebrow" style="margin-bottom:14px;">Lifestyle</p>
+    <h2 class="h-display" style="font-size:32px;">
+      Peaceful living,<br><em>warm neighbors.</em>
+    </h2>
+    <hr class="rule" style="margin:18px 0;" />
+
+    <p class="body-sm">
+      At Rancho Exeter, every detail of community life is designed for those who have earned a little more ease. From sun-warmed mornings by the pool to evenings on the patio, this is a place to slow down and settle in.
+    </p>
+
+    <!-- Photo -->
+    <div style="margin-top:18px;position:relative;overflow:hidden;">
+      <img src="brand_assets/IMG_4339.jpeg" alt="Rancho Exeter community street" style="width:100%;height:185px;object-fit:cover;display:block;filter:brightness(0.94) contrast(1.14) saturate(1.22);" />
+      <div style="position:absolute;inset:0;background:rgba(150,132,122,0.1);mix-blend-mode:multiply;"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,0.55), transparent 55%);"></div>
+      <div class="display" style="position:absolute;left:12px;right:12px;bottom:10px;color:#EEEBE4;font-style:italic;font-size:12px;font-weight:300;">
+        Quiet streets, established neighbors.
+      </div>
+    </div>
+
+    <!-- "What Makes It Home" mini-list -->
+    <div style="padding-top:22px;">
+      <p class="eyebrow" style="margin-bottom:14px;">What Makes It Home</p>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="border-left:2px solid #96847a;padding-left:12px;">
+          <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">55+ Senior Community</div>
+          <div style="font-size:10.5px;line-height:1.5;color:rgba(49,49,49,0.6);margin-top:2px;">Designed exclusively for active seniors.</div>
+        </div>
+        <div style="border-left:2px solid #96847a;padding-left:12px;">
+          <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Affordable Living</div>
+          <div style="font-size:10.5px;line-height:1.5;color:rgba(49,49,49,0.6);margin-top:2px;">Quality community at a price that makes sense.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── Panel 2: AMENITIES (white) ── -->
+  <div class="panel" style="background:#fff;">
+
+    <p class="eyebrow" style="margin-bottom:14px;">Life at Rancho Exeter</p>
+    <h2 class="h-display" style="font-size:32px;">
+      Amenities<br><em>& Comfort</em>
+    </h2>
+    <hr class="rule" style="margin:18px 0 14px;" />
+    <p style="font-size:11px;line-height:1.6;color:rgba(49,49,49,0.6);margin-bottom:18px;">
+      Everything you need for comfortable, connected daily life — right here in the community.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:11px;">
+      <div>
+        <div class="bullet-row"><span class="bullet-dot"></span><span class="item-title">Swimming Pool</span></div>
+        <div class="item-desc">Open seasonally — perfect for a relaxing summer afternoon.</div>
+      </div>
+      <div>
+        <div class="bullet-row"><span class="bullet-dot"></span><span class="item-title">Clubhouse &amp; Events</span></div>
+        <div class="item-desc">Resident clubhouse for private events and community gatherings.</div>
+      </div>
+      <div>
+        <div class="bullet-row"><span class="bullet-dot"></span><span class="item-title">Pet Friendly</span></div>
+        <div class="item-desc">All-welcome community where you and your pets feel right at home.</div>
+      </div>
+      <div>
+        <div class="bullet-row"><span class="bullet-dot"></span><span class="item-title">On-Site Management</span></div>
+        <div class="item-desc">Responsive Mon–Fri with a 24-hour emergency maintenance line.</div>
+      </div>
+      <div>
+        <div class="bullet-row"><span class="bullet-dot"></span><span class="item-title">Community Library</span></div>
+        <div class="item-desc">A quiet spot to borrow a book, swap reads with neighbors, and settle in.</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── Panel 3: NEARBY (cream + dark CTA) ── -->
+  <div class="panel" style="background:#EEEBE4;">
+
+    <p class="eyebrow" style="margin-bottom:14px;">The Neighborhood</p>
+    <h2 class="h-display" style="font-size:32px;">
+      Everything<br><em>Nearby</em>
+    </h2>
+    <hr class="rule" style="margin:18px 0 14px;" />
+    <p style="font-size:11px;line-height:1.6;color:rgba(49,49,49,0.6);margin-bottom:16px;">
+      Within easy reach of everything that makes daily life comfortable.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:13px;">
+      <div>
+        <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Public Golf Course</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#96847a;margin-top:3px;">Across the Street</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Medical Care</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#96847a;margin-top:3px;">Exeter Hospital · Kaweah Health</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Downtown Exeter</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#96847a;margin-top:3px;">Dining, Shops, Banking — Minutes Away</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Grocery &amp; Shopping</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#96847a;margin-top:3px;">Walmart · SaveMart · Local Markets</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Senior Center</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#96847a;margin-top:3px;">Programs, Classes &amp; Activities</div>
+      </div>
+      <div>
+        <div class="display" style="font-size:15px;font-weight:500;color:#313131;line-height:1.1;">Parks &amp; Nature</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#96847a;margin-top:3px;">Rocky Hill · Sequoia National Park</div>
+      </div>
+    </div>
+
+    <!-- Dark CTA box at bottom -->
+    <div class="callout callout--dark" style="margin-top:auto;">
+      <p class="eyebrow" style="color:rgba(238,235,228,0.55);margin-bottom:8px;">Visit Us</p>
+      <h3 class="h-display h-display--cream" style="font-size:22px;">
+        Come see it<br><em>for yourself.</em>
+      </h3>
+      <p style="font-size:10.5px;line-height:1.55;color:rgba(238,235,228,0.6);margin-top:10px;">
+        Walk the grounds, meet the team, and see if Rancho Exeter feels like home.
+      </p>
+      <div class="pill-cta pill-cta--cream" style="margin-top:12px;">
+        Call (949) 463-1167
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+</body>
+</html>
