@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Available Homes &amp; Spaces — Rancho Exeter Mobile Home Park</title>
+  <title>Mobile Homes for Sale in Exeter CA | 55+ Park near Fresno &amp; Visalia</title>
+  <meta name="description" content="Browse mobile homes for sale in Exeter, CA at Rancho Exeter — an affordable 55+ senior mobile home park in Tulare County, near Fresno, Visalia, Tulare, and Porterville. View photos, pricing, and open lot-rent spaces." />
+  <meta name="keywords" content="mobile homes for sale Exeter CA, mobile home parks near Fresno, mobile home parks near Visalia, 55+ mobile home park Exeter CA, senior mobile home park Tulare County, affordable senior housing Exeter California, retirement community Exeter CA, mobile home park Porterville, mobile home park Tulare CA, 55+ community Central Valley California, lot rent community Exeter" />
+  <link rel="canonical" href="https://ranchoexetermhp.com/homes" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mobile Homes for Sale in Exeter CA | Rancho Exeter 55+ Community" />
+  <meta property="og:description" content="Affordable mobile homes for sale and open lot-rent spaces at Rancho Exeter, a 55+ senior mobile home park in Exeter, CA — near Fresno and Visalia." />
+  <meta property="og:url" content="https://ranchoexetermhp.com/homes" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -262,6 +269,36 @@
       color: rgba(49,49,49,0.65);
     }
 
+    /* ─── HOME PHOTO GALLERY (thumbnails, 2×3) ─── */
+    .home-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 24px 0 4px;
+    }
+    .home-gallery-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border-radius: 2px;
+      box-shadow: 0 1px 6px rgba(49,49,49,0.10), 0 1px 2px rgba(49,49,49,0.06);
+    }
+    .home-gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.98) contrast(1.05) saturate(1.05);
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .home-gallery-item:hover img { transform: scale(1.05); }
+    .home-gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(150,132,122,0.06);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
     /* ─── BUTTONS ─── */
     .btn-outline-dark {
       display: inline-flex;
@@ -341,6 +378,9 @@
       .listing-grid { grid-template-columns: 1fr; gap: 28px; }
       .space-features { grid-template-columns: 1fr; gap: 20px; }
     }
+    @media (max-width: 540px) {
+      .home-gallery { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -385,7 +425,7 @@
   <h1 class="page-title">Available Homes<br><em>&amp; Spaces</em></h1>
   <div class="divider divider-center"></div>
   <p class="page-intro">
-    Browse our current openings — fully-built homes ready for move-in, plus open spaces for residents bringing their own home to our 55+ community.
+    Browse our current openings in Exeter, CA — move-in-ready mobile homes for sale, plus open lot-rent spaces for residents bringing their own home to our affordable 55+ community in Tulare County, just minutes from Visalia and an easy drive from Fresno.
   </p>
 </section>
 
@@ -406,13 +446,36 @@
       <!-- Listing — Unit 101 -->
       <div class="listing-card">
         <div class="listing-img-wrap">
-          <img src="brand_assets/home-101.png" alt="314 N Albert Avenue Unit 101, Exeter CA" />
+          <img src="brand_assets/home-101.png" alt="Mobile home for sale at 314 N Albert Avenue Unit 101, Rancho Exeter 55+ mobile home park, Exeter CA" />
         </div>
         <div class="listing-body">
           <p class="listing-tag">For Sale</p>
           <div class="listing-price">$59,000 <span class="listing-price-suffix">USD</span></div>
           <div class="listing-rule"></div>
           <p class="listing-meta">314 N Albert Avenue, Unit 101<br>Exeter, CA 93221</p>
+
+          <!-- Photo gallery — 2 rows × 3 columns -->
+          <div class="home-gallery">
+            <div class="home-gallery-item">
+              <img src="brand_assets/home-101.png" alt="Exterior front of mobile home for sale in Exeter CA — Unit 101, Rancho Exeter" loading="lazy" />
+            </div>
+            <div class="home-gallery-item">
+              <img src="brand_assets/home-101-kitchen.jpeg" alt="Kitchen with gas stove and wood cabinets in Exeter CA mobile home for sale, Unit 101" loading="lazy" />
+            </div>
+            <div class="home-gallery-item">
+              <img src="brand_assets/home-101-living-room.jpeg" alt="Living room with built-in wood cabinet in 55+ mobile home, Rancho Exeter, Exeter CA" loading="lazy" />
+            </div>
+            <div class="home-gallery-item">
+              <img src="brand_assets/home-101-bathroom.jpeg" alt="Full bathroom with new flooring in Exeter CA mobile home, Unit 101" loading="lazy" />
+            </div>
+            <div class="home-gallery-item">
+              <img src="brand_assets/home-101-bathtub.jpeg" alt="White bathtub and shower in mobile home for sale near Visalia, Rancho Exeter" loading="lazy" />
+            </div>
+            <div class="home-gallery-item">
+              <img src="brand_assets/home-101-hallway.jpeg" alt="Hallway with new luxury vinyl plank (LVP) flooring in Exeter CA mobile home, Unit 101" loading="lazy" />
+            </div>
+          </div>
+
           <a href="/#contact" class="btn-outline-dark">
             Inquire About This Home
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -439,7 +502,7 @@
     <div class="listing-grid">
       <div class="listing-card">
         <div class="listing-img-wrap">
-          <img src="brand_assets/available-space.png" alt="Available space at Rancho Exeter Mobile Home Park" />
+          <img src="brand_assets/available-space.png" alt="Open lot-rent space for a mobile home at Rancho Exeter 55+ mobile home park, Exeter CA near Visalia" />
         </div>
         <div class="listing-body">
           <p class="listing-tag">Now Leasing</p>
