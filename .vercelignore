@@ -1,0 +1,21 @@
+# Local tools, project notes, and secrets are not public website assets.
+.env*
+.agents/
+.claude/
+.codex/
+temporary screenshots/
+tests/
+AGENTS.md
+CLAUDE.md
+PREVIEW_CHECKLIST.md
+serve.mjs
+screenshot.mjs
+make-brochure-pdf.mjs
+settings.json
+Screenshot*
+oliviaharperhomes.com_.png
+
+# Keep source media in Git, but deploy only the optimized website versions.
+brand_assets/community-drone-original.jpg
+brand_assets/new-home/exterior-original.jpg
+brand_assets/new-home/walkthrough.mp4

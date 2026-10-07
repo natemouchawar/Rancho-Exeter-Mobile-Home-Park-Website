@@ -7,7 +7,6 @@
   <meta name="description" content="Join the Rancho Exeter resident email list for community announcements, maintenance updates, and event news at our 55+ senior mobile home park in Exeter, CA, near Fresno and Visalia." />
   <meta name="keywords" content="Rancho Exeter resident email list, 55+ mobile home park Exeter CA, senior mobile home park Tulare County, retirement community Exeter CA, mobile home parks near Visalia, mobile home parks near Fresno" />
   <link rel="canonical" href="https://ranchoexetermhp.com/join" />
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
@@ -225,6 +224,19 @@
     @media (max-width: 480px) {
       .topbar { flex-direction: row; gap: 16px; }
       .logo { font-size: 15px; }
+    }
+    /* Readability and touch targets for the resident form. */
+    .form-label { font-size: 13px; color: #65594f; letter-spacing: .06em; }
+    .form-input { font-size: 16px; min-height: 48px; }
+    .form-input::placeholder { color: #716d67; }
+    .form-input:focus-visible { outline: 2px solid #79665b; outline-offset: 4px; }
+    .back-link { color: #655f57; min-height: 44px; }
+    .page-footer, .success-text { color: #655f57; }
+    .btn-outline-dark { min-height: 50px; font-size: 13px; }
+    @media (max-width: 380px) {
+      .topbar { padding-inline: 20px; gap: 10px; flex-wrap: wrap; }
+      .back-link { font-size: 10px; }
+      .back-link-line { width: 20px; }
     }
   </style>
 </head>
