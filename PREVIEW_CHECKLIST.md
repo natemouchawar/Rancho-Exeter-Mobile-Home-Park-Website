@@ -29,7 +29,12 @@ Production; the user confirmed receipt of the one approved test email.
       The code also has a honeypot, validation, request size limits, origin
       checks, retry deduplication, and per-instance throttling.
 - [x] User reviewed the preview and authorized publication.
-- [ ] Publish through GitHub `main` and verify the production deployment.
+- [x] Published through GitHub `main` and verified production on October 7, 2026:
+      release `0610a2d`, Vercel deployment `FRSrUnNXHBtY4z6YzBVmqo7cBFQz`, Ready.
+      [Live website](https://ranchoexetermhp.com). Main routes/assets return 200,
+      inquiry readiness is true, the mobile menu and form are working, video
+      range requests return 206, and private environment/project-note URLs
+      return 404. No post-publication inquiry or booking was submitted.
 - [ ] User will test the live inquiry form and booking link using their Gmail.
       Do not send another test email or create a calendar booking for them.
 
