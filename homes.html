@@ -40,7 +40,7 @@
         <a class="brand" href="/">Rancho Exeter<small>← Back to Home</small></a>
         <nav class="desktop-nav" aria-label="Main navigation">
           <a href="/">Home</a> <a href="/spaces">Bring Your Home</a
-          ><a href="/homes" aria-current="page">Available Home</a
+          ><a href="/homes" aria-current="page">Homes for Sale</a
           ><a href="/contact">Contact</a
           ><a class="button" href="tel:+19494631167">Call (949) 463-1167</a>
         </nav>
@@ -70,7 +70,7 @@
         hidden
       >
         <a href="/">Home</a><a href="/spaces">Bring Your Home</a
-        ><a href="/homes" aria-current="page">Available Home</a
+        ><a href="/homes" aria-current="page">Homes for Sale</a
         ><a href="/contact">Contact</a>
       </nav>
     </header>
@@ -106,16 +106,10 @@
           </div>
           <img
             class="property-photo"
-            src="/brand_assets/new-home/exterior-1280.jpg"
-            srcset="
-              /brand_assets/new-home/exterior-640.jpg   640w,
-              /brand_assets/new-home/exterior-1280.jpg 1280w,
-              /brand_assets/new-home/exterior-1920.jpg 1920w
-            "
-            sizes="(max-width: 850px) 100vw, 600px"
-            width="1920"
-            height="1080"
-            alt="Exterior of Space 97 with its front porch and covered driveway"
+            src="/brand_assets/new-home/exterior-street-640.jpg"
+            width="640"
+            height="480"
+            alt="Street-level view of Space 97 with its driveway and covered entrance"
             fetchpriority="high"
             decoding="async"
           />
@@ -128,9 +122,57 @@
             <button
               class="landscape-photo"
               type="button"
+              data-gallery-src="/brand_assets/new-home/exterior-street-640.jpg"
+              data-gallery-alt="Street-level view of Space 97 with its driveway and covered entrance"
+              aria-label="Enlarge photo: Space 97 exterior"
+            >
+              <img
+                src="/brand_assets/new-home/exterior-street-640.jpg"
+                width="640"
+                height="480"
+                alt="Street-level view of Space 97 with its driveway and covered entrance"
+                loading="lazy"
+                decoding="async"
+              /><span>Space 97 exterior</span>
+            </button>
+            <button
+              class="landscape-photo"
+              type="button"
+              data-gallery-src="/brand_assets/new-home/kitchen-wide-640.jpg"
+              data-gallery-alt="Wide view of the kitchen, island, stainless steel appliances, and dining area"
+              aria-label="Enlarge photo: Kitchen &amp; dining area"
+            >
+              <img
+                src="/brand_assets/new-home/kitchen-wide-640.jpg"
+                width="640"
+                height="480"
+                alt="Wide view of the kitchen, island, stainless steel appliances, and dining area"
+                loading="lazy"
+                decoding="async"
+              /><span>Kitchen &amp; dining area</span>
+            </button>
+            <button
+              class="landscape-photo"
+              type="button"
+              data-gallery-src="/brand_assets/new-home/living-room-den-640.jpg"
+              data-gallery-alt="Living room looking toward the den and kitchen"
+              aria-label="Enlarge photo: Living room &amp; den"
+            >
+              <img
+                src="/brand_assets/new-home/living-room-den-640.jpg"
+                width="640"
+                height="480"
+                alt="Living room looking toward the den and kitchen"
+                loading="lazy"
+                decoding="async"
+              /><span>Living room &amp; den</span>
+            </button>
+            <button
+              class="landscape-photo"
+              type="button"
               data-gallery-src="/brand_assets/new-home/exterior-1920.jpg"
               data-gallery-alt="Exterior of Space 97 with its front porch and covered driveway"
-              aria-label="Enlarge photo: Space 97 exterior"
+              aria-label="Enlarge photo: Aerial view of Space 97"
             >
               <img
                 class="property-photo"
@@ -146,60 +188,9 @@
                 alt="Exterior of Space 97 with its front porch and covered driveway"
                 loading="lazy"
                 decoding="async"
-              /><span>Space 97 exterior</span>
+              /><span>Aerial view of Space 97</span>
             </button>
             <button
-              type="button"
-              data-gallery-src="/brand_assets/new-home/kitchen-960.jpg"
-              data-gallery-alt="Kitchen with wood cabinetry, stainless steel appliances, and an island"
-              aria-label="Enlarge photo: Kitchen"
-            >
-              <img
-                src="/brand_assets/new-home/kitchen-960.jpg"
-                srcset="
-                  /brand_assets/new-home/kitchen-480.jpg 480w,
-                  /brand_assets/new-home/kitchen-960.jpg 960w
-                "
-                sizes="(max-width: 600px) 45vw, (max-width: 850px) 30vw, 280px"
-                alt="Kitchen with wood cabinetry, stainless steel appliances, and an island"
-                loading="lazy"
-                decoding="async"
-              /><span>Kitchen</span></button
-            ><button
-              type="button"
-              data-gallery-src="/brand_assets/new-home/kitchen-island-960.jpg"
-              data-gallery-alt="Kitchen island and open view toward the living area"
-              aria-label="Enlarge photo: Kitchen island"
-            >
-              <img
-                src="/brand_assets/new-home/kitchen-island-960.jpg"
-                srcset="
-                  /brand_assets/new-home/kitchen-island-480.jpg 480w,
-                  /brand_assets/new-home/kitchen-island-960.jpg 960w
-                "
-                sizes="(max-width: 600px) 45vw, (max-width: 850px) 30vw, 280px"
-                alt="Kitchen island and open view toward the living area"
-                loading="lazy"
-                decoding="async"
-              /><span>Kitchen island</span></button
-            ><button
-              type="button"
-              data-gallery-src="/brand_assets/new-home/living-room-960.jpg"
-              data-gallery-alt="Bright living room with large windows and a ceiling fan"
-              aria-label="Enlarge photo: Living room"
-            >
-              <img
-                src="/brand_assets/new-home/living-room-960.jpg"
-                srcset="
-                  /brand_assets/new-home/living-room-480.jpg 480w,
-                  /brand_assets/new-home/living-room-960.jpg 960w
-                "
-                sizes="(max-width: 600px) 45vw, (max-width: 850px) 30vw, 280px"
-                alt="Bright living room with large windows and a ceiling fan"
-                loading="lazy"
-                decoding="async"
-              /><span>Living room</span></button
-            ><button
               type="button"
               data-gallery-src="/brand_assets/new-home/bedroom-closet-960.jpg"
               data-gallery-alt="Carpeted bedroom with a closet"

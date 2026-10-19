@@ -11,12 +11,19 @@
   lazy-loaded Google Map and address at `#location`.
   Keep the hero’s two exploration buttons free of prices/counts and omit its old
   “Questions?” phone line. Provide explicit Home / Back to Home navigation.
+- Lead the homepage with the park: a short community introduction and four real
+  photos of the entrance, neighborhood, pool, and clubhouse area. Use a static
+  gallery (two columns on larger screens, one on phones). Keep individual home
+  prices/specifications on `/homes`, labeled **Homes for Sale** in navigation.
+  Keep available-space links prominent. The user approved the community-focused
+  homepage and selected Space 97 photos for publication on October 19, 2026.
 - `/spaces` is a compact photo-and-blurb page with Ask About a Space and Book a
   Visit actions. Avoid repeated phone CTAs or a separate contact section there.
 - The user wants a simple, readable website for a 55+ audience: large controls,
   short copy, prominent phone/visit actions. Detailed questions belong in office
   conversations; avoid long FAQs, estimated costs, and elaborate inquiry forms.
-- The user approved publication on **October 7, 2026**. Production is
+- The user approved the initial publication on **October 7, 2026** and the park
+  gallery / Space 97 photo update on **October 19, 2026**. Production is
   `https://ranchoexetermhp.com`; pushing `main` to the existing GitHub repository
   triggers Vercel production deployment. Preview future changes locally and
   do not push or deploy a new change without a user request.
@@ -48,8 +55,13 @@
 - `join.html` → separate resident signup, with its own inline CSS/JS.
 - `brochure.html` → print brochure; `Rancho-Exeter-Brochure.pdf` is generated output.
 - `brand_assets/` → originals; `brand_assets/web/` → responsive community photos;
-  `brand_assets/new-home/` → seven interior photos, the Space 97 exterior drone photo (original plus
-  optimized sizes), and the full MP4 walkthrough. The site uses
+  `brand_assets/new-home/` → original interior/drone photos, optimized sizes, and
+  three approved October 19 additions: `exterior-street-640.jpg`,
+  `kitchen-wide-640.jpg`, and `living-room-den-640.jpg`. These are unaltered
+  640×480 copies from the user's attachments; do not upscale them. The new street
+  exterior leads `/homes`; its eight-photo gallery also includes the new kitchen
+  and living-room views, drone exterior, two bedrooms, and two bathrooms.
+  Superseded photos remain on disk. The full MP4 walkthrough is retained; the site uses
   `walkthrough-silent.mp4`, with no audio stream; retain original media.
 - `serve.mjs` → local static/API server with clean URLs and MP4 range support.
 - `api/subscribe.mjs` → existing MailerLite resident signup endpoint.

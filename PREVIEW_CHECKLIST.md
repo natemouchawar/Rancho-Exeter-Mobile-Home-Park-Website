@@ -96,3 +96,34 @@ No new amenities were added during this review.
 Latest simplification: enlarged the homepage availability labels, removed the
 repeated footer from the four main pages, and removed the final visit block on
 the available-home page. The homepage map remains.
+
+## October 19 community-focused update
+
+- Homepage now introduces the park with four large, real photos: the entrance,
+  neighborhood street, pool, and pool/clubhouse area. The drone hero and slogan
+  remain; the gallery is static and stacks on phones.
+- Removed the empty-lot and Space 97 sales sections from the homepage. Space 97
+  pricing, specifications, photos, and silent walkthrough remain on `/homes`.
+  Shared marketing navigation now calls this page **Homes for Sale**.
+- Available-space links remain prominent; the location map, contact links, and
+  live Google tour-booking links are preserved.
+- Verified all four main routes at 320, 390, 768, and 1440 pixels with no horizontal
+  overflow. Checked mobile menu/Escape, home navigation, gallery image loading,
+  and the Space 97 listing. No live inquiry or tour booking was submitted.
+- The user reviewed the local preview and explicitly approved pushing these
+  updates to GitHub and making them public on October 19, 2026. Release through
+  the existing `main` → Vercel production deployment.
+
+### Space 97 photo selection
+
+- Added only the three user-approved attachments: `image1.jpeg` (street exterior),
+  `image11 (1).jpeg` (wide kitchen/dining view), and `image12.jpeg` (living room/den).
+  Stored unchanged at 640×480 under descriptive names in `brand_assets/new-home/`.
+- The street exterior is the main listing image. The new kitchen/living views
+  replace the two older kitchen images and older living-room image; the gallery
+  remains eight photos, with the drone, bedroom, and bathroom photos retained.
+- Checked the listing/gallery at 320, 390, 768, and 1440 pixels, image loading,
+  enlargement, Next, arrow keys, and Escape. Included in the October 19 release.
+- Release checks: JavaScript/server syntax, eight stubbed inquiry tests, local
+  asset references, and `git diff --check` passed. No live inquiry or booking
+  was created.

@@ -406,6 +406,62 @@ button:disabled {
 .community-grid p {
   margin-top: 20px;
 }
+.park-intro {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: start;
+  gap: 48px;
+  margin-bottom: 36px;
+}
+.park-intro .amenities {
+  margin-top: 18px;
+}
+.park-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 24px;
+}
+.park-gallery figure {
+  margin: 0;
+}
+.park-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.park-gallery .park-entrance {
+  object-position: center 78%;
+}
+.park-gallery .park-pool {
+  object-position: center 75%;
+}
+.park-gallery .park-clubhouse {
+  object-position: center bottom;
+}
+.park-gallery figcaption {
+  margin-top: 12px;
+  color: var(--green);
+  font-size: 19px;
+  font-weight: 500;
+}
+.community-next-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.community-next-steps p {
+  max-width: 540px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+.community-next-steps .actions {
+  flex-shrink: 0;
+  margin-top: 0;
+}
 .location-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -508,6 +564,11 @@ button:disabled {
 .listing-intro .feature {
   grid-template-columns: 1fr 1.05fr;
 }
+.listing-intro .property-photo {
+  aspect-ratio: 4 / 3;
+  max-width: 640px;
+  justify-self: center;
+}
 .listing-intro h1 {
   font-size: 60px;
 }
@@ -536,7 +597,7 @@ button:disabled {
   grid-column: span 2;
 }
 .gallery .landscape-photo img {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   object-fit: contain;
   background: #e2ded5;
 }
@@ -782,7 +843,7 @@ button:disabled {
     max-height: 380px;
   }
   .gallery {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .lot-band .wrap {
     flex-direction: column;
@@ -1080,12 +1141,31 @@ button:disabled {
 }
 
 @media (max-width: 850px) {
+  .park-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .community-next-steps {
+    flex-direction: column;
+    align-items: start;
+    gap: 24px;
+  }
   .location-grid {
     grid-template-columns: 1fr;
     gap: 30px;
   }
 }
 @media (max-width: 600px) {
+  .park-gallery {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .park-intro {
+    margin-bottom: 28px;
+  }
+  .community-next-steps .actions {
+    width: 100%;
+  }
   .location-map {
     height: 300px;
   }
